@@ -32,7 +32,9 @@ for i in range(n - 1):
         if bekert_szamok[j] < bekert_szamok[minimum_index]:
             minimum_index = j
 
-    bekert_szamok[i], bekert_szamok[minimum_index] = bekert_szamok[minimum_index], bekert_szamok[i]
+    csere = bekert_szamok[i]
+    bekert_szamok[i] = bekert_szamok[minimum_index]
+    bekert_szamok[minimum_index] = csere
 
 print("A rendezett lottószámok: "
       f"{bekert_szamok[0]}, "
@@ -43,13 +45,15 @@ print("A rendezett lottószámok: "
 
 
 # 3. feladat
-# Kérjen be a felhasználótól egy egész számot 1-51 között! A bekért adatot nem kell ellenőrizni!
+# Kérjen be a felhasználótól egy egész számot 1-51 között!
+# A bekért adatot nem kell ellenőrizni!
 
 bekert_het = int(input("Kérem adja meg a hét számát (1-51): "))
 
 
 # 4. feladat
-# Írja ki a képernyőre a bekért számnak megfelelő sorszámú hét lottószámait a lottosz.dat állományban lévő adatok alapján!
+# Írja ki a képernyőre a bekért számnak megfelelő sorszámú hét lottószámait
+# a lottosz.dat állományban lévő adatok alapján!
 
 print(f"A(z) {bekert_het}. hét lottószámai: "
       f"{lottoszamok[bekert_het - 1][0]}, "
@@ -60,8 +64,8 @@ print(f"A(z) {bekert_het}. hét lottószámai: "
 
 
 # 5. feladat
-# A lottosz.dat állományból beolvasott adatok alapján döntse el, hogy volt-e olyan szám, 
-# amit egyszer sem húztak ki az 51 hét alatt! 
+# A lottosz.dat állományból beolvasott adatok alapján döntse el,
+# hogy volt-e olyan szám, amit egyszer sem húztak ki az 51 hét alatt!
 # A döntés eredményét (Van/Nincs) írja ki a képernyőre!
 
 osszes_lottoszam = []
@@ -101,9 +105,11 @@ print(f"{paratlan_szamlalo} db. páratlan szám volt az első 51 héten.")
 
 
 # 7. feladat
-# Fűzze hozzá a lottosz.dat állományból beolvasott lottószámok után a felhasználótól bekért, és rendezett 52. hét lottószámait,
+# Fűzze hozzá a lottosz.dat állományból beolvasott lottószámok után
+# a felhasználótól bekért, és rendezett 52. hét lottószámait,
 # majd írja ki az összes lottószámot a lotto52.ki szöveges fájlba!
-# A fájlban egy sorba egy hét lottószámai kerüljenek, szóközzel elválasztva egymástól!
+# A fájlban egy sorba egy hét lottószámai kerüljenek,
+# szóközzel elválasztva egymástól!
 
 lottoszamok.append(bekert_szamok)
 
@@ -121,7 +127,8 @@ with open("lotto52.ki", "wt", encoding="utf-8") as file:
 # hogy az egyes számokat hányszor húzták ki 2003-ban.
 # Az eredményt írja ki a képernyőre a következő formában:
 # az első sor első eleme az a szám legyen ahányszor az egyest kihúzták!
-# Az első sor második eleme az az érték legyen, ahányszor a kettes számot kihúzták stb.!
+# Az első sor második eleme az az érték legyen,
+# ahányszor a kettes számot kihúzták stb.!
 # (Annyit biztosan tudunk az értékekről, hogy mindegyikük egyjegyű.)
 
 kihuzasok_szama = []
@@ -140,10 +147,14 @@ for szam in kihuzasok_szama:
 print()
 
 # 9. feladat
-# Adja meg, hogy az 1-90 közötti prímszámokból melyiket nem húzták ki egyszer sem az elmúlt évben.
-# A feladat megoldása során az itt megadott prímszámokat felhasználhatja vagy előállíthatja!
+# Adja meg, hogy az 1-90 közötti prímszámokból
+# melyiket nem húzták ki egyszer sem az elmúlt évben.
+# A feladat megoldása során az itt megadott prímszámokat
+# felhasználhatja vagy előállíthatja!
 
-primek = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89]
+primek = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29,
+          31, 37, 41, 43, 47, 53, 59, 61, 67,
+          71, 73, 79, 83, 89]
 
 print("A következő prímeket egyszer sem húzták ki:")
 for prim in primek:
