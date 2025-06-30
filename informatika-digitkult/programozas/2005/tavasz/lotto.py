@@ -11,6 +11,7 @@ with open("lottosz.dat", "rt", encoding="utf-8") as file:
             feldolgozott_szamok.append(int(szam))
         lottoszamok.append(feldolgozott_szamok)
 
+
 # 1. feladat
 # Kérje be a felhasználótól az 52. hét megadott lottószámait!
 
@@ -40,15 +41,15 @@ print("A rendezett lottószámok: "
       f"{bekert_szamok[3]}, "
       f"{bekert_szamok[4]}")
 
+
 # 3. feladat
 # Kérjen be a felhasználótól egy egész számot 1-51 között! A bekért adatot nem kell ellenőrizni!
 
-bekert_het = int(input("Kérem adja meg a hét számát (1-52): "))
+bekert_het = int(input("Kérem adja meg a hét számát (1-51): "))
+
 
 # 4. feladat
 # Írja ki a képernyőre a bekért számnak megfelelő sorszámú hét lottószámait a lottosz.dat állományban lévő adatok alapján!
-
-lottoszamok.append(bekert_szamok)
 
 print(f"A(z) {bekert_het}. hét lottószámai: "
       f"{lottoszamok[bekert_het - 1][0]}, "
