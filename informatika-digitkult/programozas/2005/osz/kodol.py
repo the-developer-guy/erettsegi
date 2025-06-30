@@ -39,7 +39,7 @@ for karakter in szoveg:
             nagybetus_karakter = "U"
         elif nagybetus_karakter == "Ű":
             nagybetus_karakter = "U"
-            
+
         atalakitott_szoveg += nagybetus_karakter
 
 
