@@ -51,3 +51,53 @@ if hivas_hossz % 60 != 0:
     percek_szama += 1
 
 print(f"A megadott időtartam {percek_szama} percnek számít")
+
+
+# Fájl beolvasása és adatmodellezés a további feladatokhoz
+
+hivasok = []
+with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
+    telefonszam = False
+    hivas = {}
+    for line in file:
+        if telefonszam:
+            hivas["telefonszam"] = line
+            hivasok.append(hivas)
+            hivas = {}
+            telefonszam = False
+        else:
+            hivas_reszek = line.split(" ")
+            hivas_kezdet_ora = int(hivas_reszek[0])
+            hivas_kezdet_perc = int(hivas_reszek[1])
+            hivas_kezdet_masodperc = int(hivas_reszek[2])
+            hivas_vege_ora = int(hivas_reszek[0])
+            hivas_vege_perc = int(hivas_reszek[1])
+            hivas_vege_masodperc = int(hivas_reszek[2])
+
+            if hivas_kezdet_ora >= 7 and hivas_kezdet_ora < 18:
+                hivas["csucsido"] = True
+            else:
+                hivas["csucsido"] = False
+
+            hivas_kezdet_idobelyeg = hivas_kezdet_ora * 60 * 60 + hivas_kezdet_perc * 60 + hivas_kezdet_masodperc
+            hivas_vege_idobelyeg = hivas_vege_ora * 60 * 60 + hivas_vege_perc * 60 + hivas_vege_masodperc
+            hivas_hossz = hivas_vege_idobelyeg - hivas_kezdet_idobelyeg
+
+            percek_szama = hivas_hossz // 60
+            if hivas_hossz % 60 != 0:
+                percek_szama += 1
+            
+            hivas["hossz"] = percek_szama
+            telefonszam = True
+
+
+# 3. feladat
+# Állapítsa meg a hivasok.txt fájlban lévő hívások időpontja alapján,
+# hogy hány számlázott percet telefonált a felhasználó hívásonként!
+# A kiszámított számlázott perceket írja ki a percek.txt fájlba 
+# a következő formában!
+# perc telefonszám
+
+with open("percek.txt", "wt", encoding="utf-8") as file:
+    for hivas in hivasok:
+        file.write(f"{hivas["hossz"]} {hivas["telefonszam"]}\n")
