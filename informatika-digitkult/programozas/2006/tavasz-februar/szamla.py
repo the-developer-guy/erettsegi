@@ -61,7 +61,7 @@ with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
     hivas = {}
     for line in file:
         if telefonszam:
-            hivas["telefonszam"] = line
+            hivas["telefonszam"] = line.strip()
             hivasok.append(hivas)
             hivas = {}
             telefonszam = False
