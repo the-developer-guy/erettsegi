@@ -101,3 +101,20 @@ with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
 with open("percek.txt", "wt", encoding="utf-8") as file:
     for hivas in hivasok:
         file.write(f"{hivas["hossz"]} {hivas["telefonszam"]}\n")
+
+
+# 4. feladat
+# Állapítsa meg a hivasok.txt fájl adatai alapján,
+# hogy hány hívás volt csúcsidőben és csúcsidőn kívül!
+# Az eredményt jelenítse meg a képernyőn!
+
+csucsidos_hivasok_szama = 0
+csucsidon_kivuli_hivasok_szama = 0
+for hivas in hivasok:
+    if hivas["csucsido"] == True:
+        csucsidos_hivasok_szama += 1
+    else:
+        csucsidon_kivuli_hivasok_szama += 1
+
+print(f"{csucsidos_hivasok_szama} hívás volt csúcsidőben és "
+      f"{csucsidon_kivuli_hivasok_szama} hívás volt csúcsidőn kívül.")
