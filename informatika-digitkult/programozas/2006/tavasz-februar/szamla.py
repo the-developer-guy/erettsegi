@@ -19,3 +19,35 @@ if korzetszam == "39" or korzetszam == "41" or korzetszam == "71":
 # minden egyéb szám vezetékes hívószámnak felel meg.
 else:
     print("A megadott telefonszám vezetékes szám")
+
+
+# 2. feladat
+# Kérjen be továbbá egy hívás kezdeti és hívás vége időpontot
+# óra perc másodperc formában!
+# A két időpont alapján határozza meg,
+# hogy a számlázás szempontjából hány perces a beszélgetés!
+# A kiszámított időtartamot írja ki a képernyőre!
+
+hivas_kezdete = input("Adja meg egy hívás kezdetének időpontját (ó:p:m): ")
+hivas_vege = input("Adja meg egy hívás végének időpontját (ó:p:m): ")
+
+hivas_kezdet_reszek = hivas_kezdete.split(":")
+hivas_kezdet_ora = int(hivas_kezdet_reszek[0])
+hivas_kezdet_perc = int(hivas_kezdet_reszek[1])
+hivas_kezdet_masodperc = int(hivas_kezdet_reszek[2])
+
+hivas_vege_reszek = hivas_vege.split(":")
+hivas_vege_ora = int(hivas_vege_reszek[0])
+hivas_vege_perc = int(hivas_vege_reszek[1])
+hivas_vege_masodperc = int(hivas_vege_reszek[2])
+
+hivas_kezdet_idobelyeg = hivas_kezdet_ora * 60 * 60 + hivas_kezdet_perc * 60 + hivas_kezdet_masodperc
+hivas_vege_idobelyeg = hivas_vege_ora * 60 * 60 + hivas_vege_perc * 60 + hivas_vege_masodperc
+hivas_hossz = hivas_vege_idobelyeg - hivas_kezdet_idobelyeg
+
+# Minden megkezdett perc egy egész percnek számít.
+percek_szama = hivas_hossz // 60
+if hivas_hossz % 60 != 0:
+    percek_szama += 1
+
+print(f"A megadott időtartam {percek_szama} percnek számít")
