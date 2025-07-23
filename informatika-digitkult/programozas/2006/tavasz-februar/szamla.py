@@ -118,3 +118,25 @@ for hivas in hivasok:
 
 print(f"{csucsidos_hivasok_szama} hívás volt csúcsidőben és "
       f"{csucsidon_kivuli_hivasok_szama} hívás volt csúcsidőn kívül.")
+
+
+# 5. feladat 
+# A hivasok.txt fájlban lévő időpontok alapján határozza meg,
+# hogy hány percet beszélt a felhasználó mobil számmal
+# és hány percet vezetékessel!
+# Az eredményt jelenítse meg a képernyőn!
+
+vezetekes_perc = 0
+mobil_perc = 0
+
+for hivas in hivasok:
+    # A mobil hívószámok: 39, 41, 71 kezdődnek
+    korzetszam = hivas["telefonszam"][0:2]
+    if korzetszam == "39" or korzetszam == "41" or korzetszam == "71":
+        mobil_perc += hivas["hossz"]
+    # minden egyéb szám vezetékes hívószámnak felel meg.
+    else:
+        vezetekes_perc += hivas["hossz"]
+
+print(f"A felhasználó {mobil_perc} percet beszélt mobil számmal és "
+      f"{vezetekes_perc} percet beszélt vezetékes számmal.")
