@@ -70,9 +70,9 @@ with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
             hivas_kezdet_ora = int(hivas_reszek[0])
             hivas_kezdet_perc = int(hivas_reszek[1])
             hivas_kezdet_masodperc = int(hivas_reszek[2])
-            hivas_vege_ora = int(hivas_reszek[0])
-            hivas_vege_perc = int(hivas_reszek[1])
-            hivas_vege_masodperc = int(hivas_reszek[2])
+            hivas_vege_ora = int(hivas_reszek[3])
+            hivas_vege_perc = int(hivas_reszek[4])
+            hivas_vege_masodperc = int(hivas_reszek[5])
 
             if hivas_kezdet_ora >= 7 and hivas_kezdet_ora < 18:
                 hivas["csucsido"] = True
