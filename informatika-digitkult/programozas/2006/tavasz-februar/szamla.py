@@ -140,3 +140,26 @@ for hivas in hivasok:
 
 print(f"A felhasználó {mobil_perc} percet beszélt mobil számmal és "
       f"{vezetekes_perc} percet beszélt vezetékes számmal.")
+
+
+# 6. feladat
+# Összesítse a hivasok.txt fájl adatai alapján,
+# mennyit kell fizetnie a felhasználónak a csúcsdíjas hívásokért!
+# Az eredményt a képernyőn jelenítse meg!
+
+fizetendo_osszeg = 0
+
+for hivas in hivasok:
+    if hivas["csucsido"] == True:
+        # A mobil hívószámok: 39, 41, 71 kezdődnek
+        korzetszam = hivas["telefonszam"][0:2]
+        if korzetszam == "39" or korzetszam == "41" or korzetszam == "71":
+            percdij = 69.175
+        # minden egyéb szám vezetékes hívószámnak felel meg.
+        else:
+            percdij = 30
+
+        fizetendo_osszeg += hivas["hossz"] * percdij
+
+print(f"A felhasználónak {fizetendo_osszeg} Forintot kell fizetnie a "
+      "csúcsidős hívásokért.")
