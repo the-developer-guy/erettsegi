@@ -68,19 +68,14 @@ print(f"A(z) {bekert_het}. hét lottószámai: "
 # hogy volt-e olyan szám, amit egyszer sem húztak ki az 51 hét alatt!
 # A döntés eredményét (Van/Nincs) írja ki a képernyőre!
 
-osszes_lottoszam = []
+osszes_lottoszam = set()
 for heti_lottoszamok in lottoszamok:
     for szam in heti_lottoszamok:
-        osszes_lottoszam.append(szam)
+        osszes_lottoszam.add(szam)
 
 van_kihuzatlan_szam = False
 for keresett_szam in range(1, 91):
-    szam_megtalalva = False
-    for lottoszam in osszes_lottoszam:
-        if lottoszam == keresett_szam:
-            szam_megtalalva = True
-            break
-    if szam_megtalalva == False:
+    if keresett_szam not in osszes_lottoszam:
         van_kihuzatlan_szam = True
         break
 
