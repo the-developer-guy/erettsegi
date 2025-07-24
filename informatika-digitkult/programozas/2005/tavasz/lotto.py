@@ -4,21 +4,29 @@
 
 lottoszamok = []
 with open("lottosz.dat", "rt", encoding="utf-8") as file:
-    for line in file:
+    line = file.readline()
+    while line != "":
         szamok = line.split(" ")
         feldolgozott_szamok = []
-        for szam in szamok:
-            feldolgozott_szamok.append(int(szam))
+        elemszam = len(szamok)
+        i = 0
+        while i < elemszam:
+            szam = int(szamok[i])
+            feldolgozott_szamok.append(szam)
+            i += 1
         lottoszamok.append(feldolgozott_szamok)
+        line = file.readline()
 
 
 # 1. feladat
 # Kérje be a felhasználótól az 52. hét megadott lottószámait!
 
 bekert_szamok = []
-for i in range(5):
-    szam = int(input(f"Kérem a(z) {i + 1}. lottószámot: "))
+i = 1
+while i <= 5:
+    szam = int(input(f"Kérem a(z) {i}. lottószámot: "))
     bekert_szamok.append(szam)
+    i += 1
 
 
 # 2. feladat
@@ -26,15 +34,19 @@ for i in range(5):
 # A rendezett számokat írja ki a képernyőre!
 
 n = len(bekert_szamok)
-for i in range(n - 1):
+i = 0
+while i < n - 1:
     minimum_index = i
-    for j in range(i + 1, n):
+    j = i + 1
+    while j < n:
         if bekert_szamok[j] < bekert_szamok[minimum_index]:
             minimum_index = j
+        j += 1
 
     csere = bekert_szamok[i]
     bekert_szamok[i] = bekert_szamok[minimum_index]
     bekert_szamok[minimum_index] = csere
+    i += 1
 
 print("A rendezett lottószámok: "
       f"{bekert_szamok[0]}, "
@@ -69,20 +81,28 @@ print(f"A(z) {bekert_het}. hét lottószámai: "
 # A döntés eredményét (Van/Nincs) írja ki a képernyőre!
 
 osszes_lottoszam = []
-for heti_lottoszamok in lottoszamok:
-    for szam in heti_lottoszamok:
-        osszes_lottoszam.append(szam)
+i = 0
+while i < 51:
+    j = 0
+    while j < 5:
+        osszes_lottoszam.append(lottoszamok[i][j])
+        j += 1
+    i += 1
 
 van_kihuzatlan_szam = False
-for keresett_szam in range(1, 91):
+i = 1
+while i <= 90:
     szam_megtalalva = False
-    for lottoszam in osszes_lottoszam:
-        if lottoszam == keresett_szam:
+    j = 0
+    while j < len(osszes_lottoszam):
+        if i == osszes_lottoszam[j]:
             szam_megtalalva = True
             break
+        j += 1
     if szam_megtalalva == False:
         van_kihuzatlan_szam = True
         break
+    i += 1
 
 if van_kihuzatlan_szam:
     print("Volt olyan szám, amit egyszer sem húztak ki az első 51 héten")
@@ -96,10 +116,15 @@ else:
 # Az eredményt a képernyőre írja ki!
 
 paratlan_szamlalo = 0
-for heti_lottoszamok in lottoszamok:
-    for szam in heti_lottoszamok:
-        if szam % 2 == 1:
+n = len(lottoszamok)
+i = 0
+while i < n:
+    j = 0
+    while j < 5:
+        if lottoszamok[i][j] % 2 == 1:
             paratlan_szamlalo += 1
+        j += 1
+    i += 1
 
 print(f"{paratlan_szamlalo} db. páratlan szám volt az első 51 héten.")
 
@@ -114,12 +139,15 @@ print(f"{paratlan_szamlalo} db. páratlan szám volt az első 51 héten.")
 lottoszamok.append(bekert_szamok)
 
 with open("lotto52.ki", "wt", encoding="utf-8") as file:
-    for heti_lottoszamok in lottoszamok:
-        file.write(f"{heti_lottoszamok[0]} "
-                   f"{heti_lottoszamok[1]} "
-                   f"{heti_lottoszamok[2]} "
-                   f"{heti_lottoszamok[3]} "
-                   f"{heti_lottoszamok[4]}\n")
+    n = len(lottoszamok)
+    i = 0
+    while i < n:
+        file.write(f"{lottoszamok[i][0]} "
+                   f"{lottoszamok[i][1]} "
+                   f"{lottoszamok[i][2]} "
+                   f"{lottoszamok[i][3]} "
+                   f"{lottoszamok[i][4]}\n")
+        i += 1
 
 
 # 8. feladat
@@ -132,15 +160,22 @@ with open("lotto52.ki", "wt", encoding="utf-8") as file:
 # (Annyit biztosan tudunk az értékekről, hogy mindegyikük egyjegyű.)
 
 kihuzasok_szama = []
-for i in range(90):
+i = 0
+while i < 90:
     kihuzasok_szama.append(0)
+    i += 1
 
 with open("lotto52.ki", "rt", encoding="utf-8") as file:
-    for line in file:
+    line = file.readline()
+    while line != "":
         szamok = line.split(" ")
-        for szam in szamok:
-            konvertalt_szam = int(szam)
+        n = len(szamok)
+        i = 0
+        while i < n:
+            konvertalt_szam = int(szamok[i])
             kihuzasok_szama[konvertalt_szam - 1] += 1
+            i += 1
+        line = file.readline()
 
 for szam in kihuzasok_szama:
     print(f"{szam} ", end="")
@@ -157,6 +192,10 @@ primek = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29,
           71, 73, 79, 83, 89]
 
 print("A következő prímeket egyszer sem húzták ki:")
-for prim in primek:
+n = len(primek)
+i = 0
+while i < n:
+    prim = primek[i]
     if kihuzasok_szama[prim-1] == 0:
         print(prim)
+    i += 1
