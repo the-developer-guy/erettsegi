@@ -130,12 +130,9 @@ kihuzasok_szama = []
 for i in range(90):
     kihuzasok_szama.append(0)
 
-with open("lotto52.ki", "rt", encoding="utf-8") as file:
-    for line in file:
-        szamok = line.split(" ")
-        for szam in szamok:
-            konvertalt_szam = int(szam)
-            kihuzasok_szama[konvertalt_szam - 1] += 1
+for heti_lottoszamok in lottoszamok:
+    for szam in heti_lottoszamok:
+        kihuzasok_szama[szam - 1] += 1
 
 for szam in kihuzasok_szama:
     print(f"{szam} ", end="")
