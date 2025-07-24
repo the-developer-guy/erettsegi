@@ -3,20 +3,20 @@
 # Olvaassuk be a lottosz.dat állományt, és tároljuk el a benne lévő adatokat
 
 lottoszamok = []
-with open("lottosz.dat", "rt", encoding="utf-8") as file:
+file = open("lottosz.dat", "rt", encoding="utf-8")
+line = file.readline()
+while line != "":
+    szamok = line.split(" ")
+    feldolgozott_szamok = []
+    elemszam = len(szamok)
+    i = 0
+    while i < elemszam:
+        szam = int(szamok[i])
+        feldolgozott_szamok.append(szam)
+        i += 1
+    lottoszamok.append(feldolgozott_szamok)
     line = file.readline()
-    while line != "":
-        szamok = line.split(" ")
-        feldolgozott_szamok = []
-        elemszam = len(szamok)
-        i = 0
-        while i < elemszam:
-            szam = int(szamok[i])
-            feldolgozott_szamok.append(szam)
-            i += 1
-        lottoszamok.append(feldolgozott_szamok)
-        line = file.readline()
-
+file.close()
 
 # 1. feladat
 # Kérje be a felhasználótól az 52. hét megadott lottószámait!
@@ -138,17 +138,18 @@ print(f"{paratlan_szamlalo} db. páratlan szám volt az első 51 héten.")
 
 lottoszamok.append(bekert_szamok)
 
-with open("lotto52.ki", "wt", encoding="utf-8") as file:
-    n = len(lottoszamok)
-    i = 0
-    while i < n:
-        file.write(f"{lottoszamok[i][0]} "
-                   f"{lottoszamok[i][1]} "
-                   f"{lottoszamok[i][2]} "
-                   f"{lottoszamok[i][3]} "
-                   f"{lottoszamok[i][4]}\n")
-        i += 1
-
+file = open("lotto52.ki", "wt", encoding="utf-8")
+n = len(lottoszamok)
+i = 0
+while i < n:
+    file.write(f"{lottoszamok[i][0]} "
+               f"{lottoszamok[i][1]} "
+               f"{lottoszamok[i][2]} "
+               f"{lottoszamok[i][3]} "
+               f"{lottoszamok[i][4]}\n")
+    i += 1
+file.flush()
+file.close()
 
 # 8. feladat
 # Határozza meg a lotto52.ki állomány adatai alapján,
@@ -165,17 +166,18 @@ while i < 90:
     kihuzasok_szama.append(0)
     i += 1
 
-with open("lotto52.ki", "rt", encoding="utf-8") as file:
+file = open("lotto52.ki", "rt", encoding="utf-8")
+line = file.readline()
+while line != "":
+    szamok = line.split(" ")
+    n = len(szamok)
+    i = 0
+    while i < n:
+        konvertalt_szam = int(szamok[i])
+        kihuzasok_szama[konvertalt_szam - 1] += 1
+        i += 1
     line = file.readline()
-    while line != "":
-        szamok = line.split(" ")
-        n = len(szamok)
-        i = 0
-        while i < n:
-            konvertalt_szam = int(szamok[i])
-            kihuzasok_szama[konvertalt_szam - 1] += 1
-            i += 1
-        line = file.readline()
+file.close()
 
 for szam in kihuzasok_szama:
     print(f"{szam} ", end="")
