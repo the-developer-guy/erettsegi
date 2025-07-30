@@ -35,7 +35,7 @@ while i <= 5:
 
 n = len(bekert_szamok)
 i = 0
-while i < n - 1:
+while i < n - 2:
     minimum_index = i
     j = i + 1
     while j < n:
@@ -43,9 +43,10 @@ while i < n - 1:
             minimum_index = j
         j += 1
 
-    csere = bekert_szamok[i]
-    bekert_szamok[i] = bekert_szamok[minimum_index]
-    bekert_szamok[minimum_index] = csere
+    if i != minimum_index:
+        csere = bekert_szamok[i]
+        bekert_szamok[i] = bekert_szamok[minimum_index]
+        bekert_szamok[minimum_index] = csere
     i += 1
 
 print("A rendezett lottószámok: "
