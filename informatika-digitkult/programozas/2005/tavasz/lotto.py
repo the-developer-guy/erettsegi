@@ -81,24 +81,18 @@ print(f"A(z) {bekert_het}. hét lottószámai: "
 # hogy volt-e olyan szám, amit egyszer sem húztak ki az 51 hét alatt!
 # A döntés eredményét (Van/Nincs) írja ki a képernyőre!
 
-osszes_lottoszam = []
-i = 0
-while i < 51:
-    j = 0
-    while j < 5:
-        osszes_lottoszam.append(lottoszamok[i][j])
-        j += 1
-    i += 1
-
 van_kihuzatlan_szam = False
 i = 1
 while i <= 90:
     szam_megtalalva = False
     j = 0
-    while j < len(osszes_lottoszam):
-        if i == osszes_lottoszam[j]:
-            szam_megtalalva = True
-            break
+    while j < 51 and szam_megtalalva == False:
+        k = 0
+        while k < 5:
+            if i == lottoszamok[j][k]:
+                szam_megtalalva = True
+                break
+            k += 1
         j += 1
     if szam_megtalalva == False:
         van_kihuzatlan_szam = True
