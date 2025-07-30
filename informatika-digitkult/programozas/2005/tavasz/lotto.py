@@ -1,4 +1,3 @@
-
 # 0. feladat
 # Olvaassuk be a lottosz.dat állományt, és tároljuk el a benne lévő adatokat
 
@@ -18,6 +17,7 @@ while line != "":
     line = file.readline()
 file.close()
 
+
 # 1. feladat
 # Kérje be a felhasználótól az 52. hét megadott lottószámait!
 
@@ -33,7 +33,7 @@ while i <= 5:
 # A program rendezze a bekért lottószámokat emelkedő sorrendbe!
 # A rendezett számokat írja ki a képernyőre!
 
-n = len(bekert_szamok)
+n = 5
 i = 0
 while i < n - 2:
     minimum_index = i
@@ -111,9 +111,8 @@ else:
 # Az eredményt a képernyőre írja ki!
 
 paratlan_szamlalo = 0
-n = len(lottoszamok)
 i = 0
-while i < n:
+while i < 51:
     j = 0
     while j < 5:
         if lottoszamok[i][j] % 2 == 1:
@@ -134,17 +133,18 @@ print(f"{paratlan_szamlalo} db. páratlan szám volt az első 51 héten.")
 lottoszamok.append(bekert_szamok)
 
 file = open("lotto52.ki", "wt", encoding="utf-8")
-n = len(lottoszamok)
 i = 0
-while i < n:
+while i < 52:
     file.write(f"{lottoszamok[i][0]} "
                f"{lottoszamok[i][1]} "
                f"{lottoszamok[i][2]} "
                f"{lottoszamok[i][3]} "
                f"{lottoszamok[i][4]}\n")
     i += 1
+
 file.flush()
 file.close()
+
 
 # 8. feladat
 # Határozza meg a lotto52.ki állomány adatai alapján,
@@ -161,22 +161,25 @@ while i < 90:
     kihuzasok_szama.append(0)
     i += 1
 
-file = open("lotto52.ki", "rt", encoding="utf-8")
-line = file.readline()
-while line != "":
-    szamok = line.split(" ")
-    n = len(szamok)
-    i = 0
-    while i < n:
-        konvertalt_szam = int(szamok[i])
-        kihuzasok_szama[konvertalt_szam - 1] += 1
-        i += 1
-    line = file.readline()
-file.close()
+i = 0
+while i < 52:
+    j = 0
+    while j < 5:
+        kihuzott_szam = lottoszamok[i][j]
+        kihuzasok_szama[kihuzott_szam - 1] += 1
+        j += 1
+    i += 1
 
-for szam in kihuzasok_szama:
-    print(f"{szam} ", end="")
-print()
+i = 0
+j = 0
+while i < 90:
+    print(f"{kihuzasok_szama[i]} ", end="")
+    i += 1
+    j += 1
+    if j == 15:
+        print()
+        j = 0
+
 
 # 9. feladat
 # Adja meg, hogy az 1-90 közötti prímszámokból
