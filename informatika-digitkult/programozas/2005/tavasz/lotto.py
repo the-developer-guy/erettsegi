@@ -54,9 +54,8 @@ line = file.readline()
 while line != "":
     szamok = line.split(" ")
     feldolgozott_szamok = []
-    elemszam = len(szamok)
     i = 0
-    while i < elemszam:
+    while i < 5:
         szam = int(szamok[i])
         feldolgozott_szamok.append(szam)
         i += 1
@@ -188,9 +187,9 @@ primek = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29,
           71, 73, 79, 83, 89]
 
 print("A következő prímeket egyszer sem húzták ki:")
-n = len(primek)
 i = 0
-while i < n:
+# mert 24 prímszám van a listában
+while i < 24:
     prim = primek[i]
     if kihuzasok_szama[prim-1] == 0:
         print(prim)
