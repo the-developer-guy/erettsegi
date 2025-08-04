@@ -1,23 +1,3 @@
-# 0. feladat
-# Olvaassuk be a lottosz.dat állományt, és tároljuk el a benne lévő adatokat
-
-lottoszamok = []
-file = open("lottosz.dat", "rt", encoding="utf-8")
-line = file.readline()
-while line != "":
-    szamok = line.split(" ")
-    feldolgozott_szamok = []
-    elemszam = len(szamok)
-    i = 0
-    while i < elemszam:
-        szam = int(szamok[i])
-        feldolgozott_szamok.append(szam)
-        i += 1
-    lottoszamok.append(feldolgozott_szamok)
-    line = file.readline()
-file.close()
-
-
 # 1. feladat
 # Kérje be a felhasználótól az 52. hét megadott lottószámait!
 
@@ -67,6 +47,22 @@ bekert_het = int(input("Kérem adja meg a hét számát (1-51): "))
 # 4. feladat
 # Írja ki a képernyőre a bekért számnak megfelelő sorszámú hét lottószámait
 # a lottosz.dat állományban lévő adatok alapján!
+
+lottoszamok = []
+file = open("lottosz.dat", "rt", encoding="utf-8")
+line = file.readline()
+while line != "":
+    szamok = line.split(" ")
+    feldolgozott_szamok = []
+    elemszam = len(szamok)
+    i = 0
+    while i < elemszam:
+        szam = int(szamok[i])
+        feldolgozott_szamok.append(szam)
+        i += 1
+    lottoszamok.append(feldolgozott_szamok)
+    line = file.readline()
+file.close()
 
 print(f"A(z) {bekert_het}. hét lottószámai: "
       f"{lottoszamok[bekert_het - 1][0]}, "
