@@ -1,6 +1,6 @@
 
 # 0. feladat
-# Olvaassuk be a lottosz.dat állományt, és tároljuk el a benne lévő adatokat
+# Olvassuk be a lottosz.dat állományt, és tároljuk el a benne lévő adatokat
 
 lottoszamok = []
 with open("lottosz.dat", "rt", encoding="utf-8") as file:
@@ -25,16 +25,7 @@ for i in range(5):
 # A program rendezze a bekért lottószámokat emelkedő sorrendbe!
 # A rendezett számokat írja ki a képernyőre!
 
-n = len(bekert_szamok)
-for i in range(n - 1):
-    minimum_index = i
-    for j in range(i + 1, n):
-        if bekert_szamok[j] < bekert_szamok[minimum_index]:
-            minimum_index = j
-
-    csere = bekert_szamok[i]
-    bekert_szamok[i] = bekert_szamok[minimum_index]
-    bekert_szamok[minimum_index] = csere
+bekert_szamok.sort()
 
 print("A rendezett lottószámok: "
       f"{bekert_szamok[0]}, "
@@ -73,13 +64,7 @@ for heti_lottoszamok in lottoszamok:
     for szam in heti_lottoszamok:
         osszes_lottoszam.add(szam)
 
-van_kihuzatlan_szam = False
-for keresett_szam in range(1, 91):
-    if keresett_szam not in osszes_lottoszam:
-        van_kihuzatlan_szam = True
-        break
-
-if van_kihuzatlan_szam:
+if len(osszes_lottoszam) < 90:
     print("Volt olyan szám, amit egyszer sem húztak ki az első 51 héten")
 else:
     print("Minden számot kihúztak az első 51 héten")
@@ -134,9 +119,10 @@ for heti_lottoszamok in lottoszamok:
     for szam in heti_lottoszamok:
         kihuzasok_szama[szam - 1] += 1
 
-for szam in kihuzasok_szama:
-    print(f"{szam} ", end="")
-print()
+for i in range(90):
+    print(f"{kihuzasok_szama[i]} ", end="")
+    if i % 15 == 0:
+        print()
 
 # 9. feladat
 # Adja meg, hogy az 1-90 közötti prímszámokból
