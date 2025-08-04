@@ -15,7 +15,7 @@ while i <= 5:
 
 n = 5
 i = 0
-while i < n - 2:
+while i < n - 1:
     minimum_index = i
     j = i + 1
     while j < n:
