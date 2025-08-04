@@ -78,20 +78,18 @@ print(f"A(z) {bekert_het}. hét lottószámai: "
 
 van_kihuzatlan_szam = False
 i = 1
-while i <= 90:
+while i <= 90 and van_kihuzatlan_szam == False:
     szam_megtalalva = False
     j = 0
     while j < 51 and szam_megtalalva == False:
         k = 0
-        while k < 5:
+        while k < 5 and szam_megtalalva == False:
             if i == lottoszamok[j][k]:
                 szam_megtalalva = True
-                break
             k += 1
         j += 1
     if szam_megtalalva == False:
         van_kihuzatlan_szam = True
-        break
     i += 1
 
 if van_kihuzatlan_szam:
