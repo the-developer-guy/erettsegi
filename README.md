@@ -14,6 +14,8 @@ A profi szint kitekintést nyújt azoknak, akik szeretnék a szoftverfejlesztés
 
 ### Elvárt kompetenciák - digitális kultúra, középszint
 
+[Link a digitális kultúra 2022- vizsgakövetelményekhez.](https://www.oktatas.hu/pub_bin/dload/kozoktatas/erettsegi/vizsgakovetelmenyek2024/dig_kult_2024_e.pdf)
+
 A vizsgázó legyen képes alkalmazói készséget igénylő feladatokat megoldani, felismerni és élő nyelven megfogalmazni a problémát és problémára adekvát megoldást adni. A felismert problémát algoritmikus gondolkodás útján, az algoritmikus gondolkodást segítő eszközök és szoftverek  használatával oldja meg. Legyen képes önálló munkavégzésre, végezzen alkotó munkát a problémamegoldás során.
 
 #### Algoritmizálás, adatmodellezés
@@ -54,6 +56,8 @@ Vizsgakövetelmények:
 
 ### Elvárt kompetenciák - digitális kultúra, emelt szint
 
+[Link a digitális kultúra 2022- vizsgakövetelményekhez.](https://www.oktatas.hu/pub_bin/dload/kozoktatas/erettsegi/vizsgakovetelmenyek2024/dig_kult_2024_e.pdf)
+
 A középszint elvárásain felül a következők is:
 
 #### Algoritmizálás, adatmodellezés
@@ -71,7 +75,11 @@ A középszint elvárásain felül a következők is:
 - Legyen képes a szöveges állományokra alkalmazható műveleteket megvalósítani.
 - Tudjon nyomkövetéssel programot tesztelni.
 
-### Elvárt kompetenciák - informatika, emelt szint
+### Elvárt kompetenciák - informatika, emelt szint - MÁR NEM VÁLASZTHATÓ!
+
+Az informatika érettségi a 2024-es szezon óta nem választható. Az elvárt tudás nagyon hasonló a **digitális kultúra** és **informatika** tárgyak esetében, ezért gyakorlásként érdemes lehet ezeket is átnézni!
+
+[Link az informatika 2017- vizsgakövetelményekhez.](https://www.oktatas.hu/pub_bin/dload/kozoktatas/erettsegi/vizsgakovetelmenyek2017/informatika_vk.pdf)
 
 #### Algoritmizálás, adatmodellezés
 
