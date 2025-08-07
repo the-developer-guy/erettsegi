@@ -165,5 +165,5 @@ for hivas in hivasok:
 
         fizetendo_osszeg += hivas["hossz"] * percdij
 
-print(f"A felhasználónak {fizetendo_osszeg} Forintot kell fizetnie a "
+print(f"A felhasználónak {fizetendo_osszeg:.2f} Forintot kell fizetnie a "
       "csúcsidős hívásokért.")
