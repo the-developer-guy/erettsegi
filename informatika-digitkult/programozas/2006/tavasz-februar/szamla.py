@@ -11,7 +11,7 @@ bekert_telefonszam = input("Adjon meg egy telefonszámot: ")
 
 # Minden telefonszám elején egy kétjegyű körzetszám,
 # illetve mobil hívószám található.
-korzetszam = bekert_telefonszam[0:2]
+korzetszam = bekert_telefonszam[0] + bekert_telefonszam[1]
 
 # A mobil hívószámok: 39, 41, 71 kezdődnek, 
 if korzetszam == "39" or korzetszam == "41" or korzetszam == "71":
