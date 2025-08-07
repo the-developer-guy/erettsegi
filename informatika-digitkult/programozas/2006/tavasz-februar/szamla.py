@@ -61,7 +61,17 @@ with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
     hivas = {}
     for line in file:
         if telefonszam:
-            hivas["telefonszam"] = line.strip()
+            szam = line.strip()
+            hivas["telefonszam"] = szam
+
+            korzetszam = szam[0] + szam[1]
+            # A mobil hívószámok: 39, 41, 71 kezdődnek
+            if korzetszam == "39" or korzetszam == "41" or korzetszam == "71":
+                hivas["mobilszam"] = True
+            # minden egyéb szám vezetékes hívószámnak felel meg.
+            else:
+                hivas["mobilszam"] = False
+
             hivasok.append(hivas)
             hivas = {}
             telefonszam = False
@@ -130,11 +140,8 @@ vezetekes_perc = 0
 mobil_perc = 0
 
 for hivas in hivasok:
-    # A mobil hívószámok: 39, 41, 71 kezdődnek
-    korzetszam = hivas["telefonszam"][0:2]
-    if korzetszam == "39" or korzetszam == "41" or korzetszam == "71":
+    if hivas["mobilszam"] == True:
         mobil_perc += hivas["hossz"]
-    # minden egyéb szám vezetékes hívószámnak felel meg.
     else:
         vezetekes_perc += hivas["hossz"]
 
@@ -151,11 +158,8 @@ fizetendo_osszeg = 0
 
 for hivas in hivasok:
     if hivas["csucsido"] == True:
-        # A mobil hívószámok: 39, 41, 71 kezdődnek
-        korzetszam = hivas["telefonszam"][0:2]
-        if korzetszam == "39" or korzetszam == "41" or korzetszam == "71":
+        if hivas["mobilszam"] == True:
             percdij = 69.175
-        # minden egyéb szám vezetékes hívószámnak felel meg.
         else:
             percdij = 30
 
