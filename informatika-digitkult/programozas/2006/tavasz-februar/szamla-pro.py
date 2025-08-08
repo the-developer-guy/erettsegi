@@ -67,20 +67,7 @@ hivasok = []
 with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
     hivas = {}
     for i, line in enumerate(file):
-        if i & 1 == 1:
-            szam = line.strip()
-            hivas["telefonszam"] = szam
-
-            if mobilszam(szam):
-                hivas["mobilszam"] = True
-            else:
-                hivas["mobilszam"] = False
-            
-            hivas["dij"] = hivas_dij(hivas["hossz"], szam, hivas["csucsido"])
-
-            hivasok.append(hivas)
-            hivas = {}
-        else:
+        if i & 1 == 0:
             hivas_reszek = line.split(" ")
             hivas_kezdet_ora = int(hivas_reszek[0])
 
@@ -96,6 +83,19 @@ with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
                                                     hivas_reszek[4],
                                                     hivas_reszek[5])
             hivas["hossz"] = megkezdett_perc(hivas_kezdet_idobelyeg, hivas_vege_idobelyeg)
+        else:
+            szam = line.strip()
+            hivas["telefonszam"] = szam
+
+            if mobilszam(szam):
+                hivas["mobilszam"] = True
+            else:
+                hivas["mobilszam"] = False
+            
+            hivas["dij"] = hivas_dij(hivas["hossz"], szam, hivas["csucsido"])
+
+            hivasok.append(hivas)
+            hivas = {}
 
 
 # 3. feladat
@@ -118,24 +118,14 @@ print(f"{csucsidos_hivasok_szama} hívás volt csúcsidőben és "
 
 
 # 5. feladat 
-# A hivasok.txt fájlban lévő időpontok alapján határozza meg,
-# hogy hány percet beszélt a felhasználó mobil számmal
-# és hány percet vezetékessel!
-# Az eredményt jelenítse meg a képernyőn!
-
 mobil_hivasok = [hivas["hossz"] for hivas in hivasok if hivas["mobilszam"]]
 vezetekes_hivasok = [hivas["hossz"] for hivas in hivasok if not hivas["mobilszam"]]
-
 
 print(f"A felhasználó {sum(mobil_hivasok)} percet beszélt mobil számmal és "
       f"{sum(vezetekes_hivasok)} percet beszélt vezetékes számmal.")
 
 
 # 6. feladat
-# Összesítse a hivasok.txt fájl adatai alapján,
-# mennyit kell fizetnie a felhasználónak a csúcsdíjas hívásokért!
-# Az eredményt a képernyőn jelenítse meg!
-
 csucsidos_dijak = [hivas["dij"] for hivas in hivasok if hivas["csucsido"]]
 
 print(f"A felhasználónak {sum(csucsidos_dijak)} Forintot kell fizetnie a "

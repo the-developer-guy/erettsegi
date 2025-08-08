@@ -57,25 +57,10 @@ print(f"A megadott időtartam {percek_szama} percnek számít")
 
 hivasok = []
 with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
-    telefonszam = False
+    idopontok = True
     hivas = {}
     for line in file:
-        if telefonszam:
-            szam = line.strip()
-            hivas["telefonszam"] = szam
-
-            korzetszam = szam[0] + szam[1]
-            # A mobil hívószámok: 39, 41, 71 kezdődnek
-            if korzetszam == "39" or korzetszam == "41" or korzetszam == "71":
-                hivas["mobilszam"] = True
-            # minden egyéb szám vezetékes hívószámnak felel meg.
-            else:
-                hivas["mobilszam"] = False
-
-            hivasok.append(hivas)
-            hivas = {}
-            telefonszam = False
-        else:
+        if idopontok:
             hivas_reszek = line.split(" ")
             hivas_kezdet_ora = int(hivas_reszek[0])
             hivas_kezdet_perc = int(hivas_reszek[1])
@@ -98,7 +83,22 @@ with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
                 percek_szama += 1
             
             hivas["hossz"] = percek_szama
-            telefonszam = True
+            idopontok = False
+        else:
+            szam = line.strip()
+            hivas["telefonszam"] = szam
+
+            korzetszam = szam[0] + szam[1]
+            # A mobil hívószámok: 39, 41, 71 kezdődnek
+            if korzetszam == "39" or korzetszam == "41" or korzetszam == "71":
+                hivas["mobilszam"] = True
+            # minden egyéb szám vezetékes hívószámnak felel meg.
+            else:
+                hivas["mobilszam"] = False
+
+            hivasok.append(hivas)
+            hivas = {}
+            idopontok = True
 
 
 # 3. feladat
