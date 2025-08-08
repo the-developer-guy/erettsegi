@@ -31,6 +31,19 @@ def megkezdett_perc(kezdet_idobelyeg, vege_idobelyeg):
     return math.ceil(hossz / 60)
 
 
+def hivas_dij(hossz, szam, csucsido):
+    if mobilszam(szam):
+        if csucsido:
+            return hossz * 69.175
+        else:
+            return hossz * 46.675
+    else:
+        if csucsido:
+            return hossz * 30
+        else:
+            return hossz * 15
+
+
 # 1. feladat
 bekert_telefonszam = input("Adjon meg egy telefonszámot: ")
 
@@ -62,6 +75,8 @@ with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
                 hivas["mobilszam"] = True
             else:
                 hivas["mobilszam"] = False
+            
+            hivas["dij"] = hivas_dij(hivas["hossz"], szam, hivas["csucsido"])
 
             hivasok.append(hivas)
             hivas = {}
@@ -108,17 +123,12 @@ print(f"{csucsidos_hivasok_szama} hívás volt csúcsidőben és "
 # és hány percet vezetékessel!
 # Az eredményt jelenítse meg a képernyőn!
 
-vezetekes_perc = 0
-mobil_perc = 0
+mobil_hivasok = [hivas["hossz"] for hivas in hivasok if hivas["mobilszam"]]
+vezetekes_hivasok = [hivas["hossz"] for hivas in hivasok if not hivas["mobilszam"]]
 
-for hivas in hivasok:
-    if mobilszam(hivas["telefonszam"]):
-        mobil_perc += hivas["hossz"]
-    else:
-        vezetekes_perc += hivas["hossz"]
 
-print(f"A felhasználó {mobil_perc} percet beszélt mobil számmal és "
-      f"{vezetekes_perc} percet beszélt vezetékes számmal.")
+print(f"A felhasználó {sum(mobil_hivasok)} percet beszélt mobil számmal és "
+      f"{sum(vezetekes_hivasok)} percet beszélt vezetékes számmal.")
 
 
 # 6. feladat
@@ -126,15 +136,7 @@ print(f"A felhasználó {mobil_perc} percet beszélt mobil számmal és "
 # mennyit kell fizetnie a felhasználónak a csúcsdíjas hívásokért!
 # Az eredményt a képernyőn jelenítse meg!
 
-fizetendo_osszeg = 0
+csucsidos_dijak = [hivas["dij"] for hivas in hivasok if hivas["csucsido"]]
 
-for hivas in hivasok:
-    if hivas["csucsido"] and hivas["mobilszam"]:
-        percdij = 69.175
-    else:
-        percdij = 30
-
-    fizetendo_osszeg += hivas["hossz"] * percdij
-
-print(f"A felhasználónak {fizetendo_osszeg} Forintot kell fizetnie a "
+print(f"A felhasználónak {sum(csucsidos_dijak)} Forintot kell fizetnie a "
       "csúcsidős hívásokért.")
