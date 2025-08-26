@@ -88,6 +88,11 @@ output.write(acid_message)
 # A meghatározásánál vegye figyelembe, hogy az
 # aminosavak összekapcsolódása során
 # minden kapcsolat létrejöttekor egy vízmolekula (H2O) lép ki!
+# Amennyiben a bsa.txt beolvasása sikertelen,
+# helyette tárolja a G,A,R,F,C betűjeleket tízszer egymás után
+# és a feladatokat erre a „láncra” oldja meg!
+
+bsa = "GARFCGARFCGARFCGARFCGARFCGARFCGARFCGARFCGARFCGARFC" 
 
 bsa = ""
 with open("bsa.txt", "rt", encoding="utf-8") as file:
@@ -108,9 +113,8 @@ for acid in bsa:
     n += current_acid["n"]
     s += current_acid["s"]
 
-connection_count = len(bsa) - 1
-h -= connection_count * 2
-o -= connection_count
+h -= (len(bsa) - 1) * 2
+o -= len(bsa) - 1
 
 formula = f"C {c} H {h} O {o} N {n} S {s}\n"
 print(formula, end="")
