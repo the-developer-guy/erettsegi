@@ -1,45 +1,54 @@
+def t9_encoder(text: str):
+    result = ""
+
+    for letter in text:
+        l = letter.lower()
+        match l:
+            case "a" | "b" | "c":
+                result += "2"
+            case "d" | "e" | "f":
+                result += "3"
+            case "g" | "h" | "i":
+                result += "4"
+            case "j" | "k" | "l":
+                result += "5"
+            case "m" | "n" | "o":
+                result += "6"
+            case "p" | "q" | "r" | "s":
+                result += "7"
+            case "t" | "u" | "v":
+                result += "8"
+            case "w" | "x" | "y" | "z":
+                result += "9"
+            case " " | "." | "," | "?" | "!":
+                result += "0"
+            case _:
+                pass
+    
+    return result
+
+class T9_Word:
+
+    def __init__(self, word: str):
+        self.word = word.strip()
+        self.code = t9_encoder(word)
+
+    def __len__(self):
+        return len(self.word)
+    
+    def __str__(self):
+        return self.word
+
+
 # 1. feladat
-# Kérjen be a felhasználótól egy betűt,
-# és adja meg, hogy milyen kód (szám) tartozik hozzá!
-# Az eredményt írassa a képernyőre!
-
 letter = input("Adjon meg egy (kis)betűt: ")
-
-code_table = {
-    "a": 2, "b": 2, "c": 2,
-    "d": 3, "e": 3, "f": 3,
-    "g": 4, "h": 4, "i": 4,
-    "j": 5, "k": 5, "l": 5,
-    "m": 6, "n": 6, "o": 6,
-    "p": 7, "q": 7, "r": 7, "s": 7,
-    "t": 8, "u": 8, "v": 8,
-    "w": 9, "x": 9, "y": 9, "z": 9
-}
-
-print(f"A(z) {letter} betű kódja: {code_table[letter]}")
+print(f"A(z) {letter} betű kódja: {t9_encoder(letter)}")
 
 
 # 2. feladat
 # Kérjen be a felhasználótól egy szót, és határozza meg,
 # hogy milyen számsorral lehet ezt a telefonba bevinni!
 # Az eredményt írassa a képernyőre!
-
-def t9_encoder(word):
-    code_table = {
-    "a": "2", "b": "2", "c": "2",
-    "d": "3", "e": "3", "f": "3",
-    "g": "4", "h": "4", "i": "4",
-    "j": "5", "k": "5", "l": "5",
-    "m": "6", "n": "6", "o": "6",
-    "p": "7", "q": "7", "r": "7", "s": "7",
-    "t": "8", "u": "8", "v": "8",
-    "w": "9", "x": "9", "y": "9", "z": "9"
-    }
-    result = ""
-    for letter in word:
-        result += code_table[letter]
-    
-    return result
 
 word = input("Adjon meg egy szót: ")
 print(f"A(z) \"{word}\" szót a {t9_encoder(word)} kóddal lehet a telefonba bevinni.")
@@ -53,19 +62,10 @@ words = []
 code_count = {}
 with open("szavak.txt", "rt", encoding="utf-8") as file:
     for line in file:
-        word = line.strip()
-        lenght = len(word)
-        code = t9_encoder(word)
-        w = {
-            "word": word,
-            "length": lenght,
-            "code": code
-        }
+        w = T9_Word(line)
         words.append(w)
 
-        if code not in code_count:
-            code_count[code] = 0
-        code_count[code] += 1
+        code_count[w.code] = code_count.get(w.code, 0) + 1
 
 
 # 4. feladat
@@ -75,11 +75,11 @@ with open("szavak.txt", "rt", encoding="utf-8") as file:
 
 longest_word = words[0]
 for word in words:
-    if word["length"] > longest_word["length"]:
+    if len(word) > len(longest_word):
         longest_word = word
 
-print(f"A leghosszabb szó: \"{longest_word["word"]}\", "
-      f"{longest_word["length"]} karakter hosszú.")
+print(f"A leghosszabb szó: \"{longest_word}\", "
+      f"{len(longest_word)} karakter hosszú.")
 
 
 # 5. feladat
@@ -88,7 +88,7 @@ print(f"A leghosszabb szó: \"{longest_word["word"]}\", "
 
 short_word_count = 0
 for word in words:
-    if word["length"] <= 5:
+    if len(word) <= 5:
         short_word_count += 1
 
 print(f"A fáljban {short_word_count} db. rövid szó található.")
@@ -102,7 +102,7 @@ print(f"A fáljban {short_word_count} db. rövid szó található.")
 
 with open("kodok.txt", "wt", encoding="utf-8") as file:
     for word in words:
-        file.write(f"{word["code"]}\n")
+        file.write(f"{word.code}\n")
 
 
 # 7. feladat
@@ -111,26 +111,26 @@ with open("kodok.txt", "wt", encoding="utf-8") as file:
 # Amennyiben több szó is megfelelő, akkor mindegyiket írassa ki!
 
 requested_code = input("Adjon meg egy számsort: ")
-print(f"A {requested_code} számkódhoz az alábbi szavak tartoznak:")
-for word in words:
-    if word["code"] == requested_code:
-        print(f"- {word["word"]}")
+specific_words = [str(word) for word in words if word.code == requested_code]
+if len(specific_words) == 0:
+    print(f"Nem tartozik szó a(z) {requested_code} kódhoz.")
+else:
+    print(f"A {requested_code} számkódhoz az alábbi szavak tartoznak:")
+    print(*specific_words, sep=", ")
 
 
 # 8. feladat
 # Határozza meg, hogy a szógyűjteményben mely kódokhoz tartozik több szó is!
 # Írassa ki a képernyőre ezeket a szavakat a kódjukkal együtt egymás mellé...
 
-multiword_codes = []
-for code in code_count:
-    if code_count[code] > 1:
-        multiword_codes.append(code)
-
+multiword_codes = [code for code in code_count if code_count[code] > 1]
 print("Az alábbi kódokhoz tartozik több szó is:")
+print_items = []
 for word in words:
-    if word["code"] in multiword_codes:
-        print(f"{word["word"]} : {word["code"]}; ", end="")
-print()
+    if word.code in multiword_codes:
+        print_items.append(f"{word} : {word.code}")
+print(*print_items, sep="; ")
+
 
 # 9. feladat
 # Határozza meg, hogy melyik kódnak megfelelő szóból van a legtöbb!
@@ -145,5 +145,5 @@ for code in code_count:
 
 print(f"A leggyakoribb számsor: {most_frequent_code}. A hozzá tartozó szavak:")
 for word in words:
-    if word["code"] == most_frequent_code:
-        print(f"- {word["word"]}")
+    if word.code == most_frequent_code:
+        print(f"- {word}")
