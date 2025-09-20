@@ -20,7 +20,7 @@ def bekert_idobol_idobelyeg(hivas_idopont):
 
 def mobilszam(telefonszam):
     mobil_szamok = [39, 41, 71]
-    korzetszam = telefonszam[:2]
+    korzetszam = int(telefonszam[:2])
 
     return korzetszam in mobil_szamok
 
@@ -71,7 +71,7 @@ with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
             hivas_reszek = line.split(" ")
             hivas_kezdet_ora = int(hivas_reszek[0])
 
-            if hivas_kezdet_ora >= 7 and hivas_kezdet_ora < 18:
+            if 7 <= hivas_kezdet_ora < 18:
                 hivas["csucsido"] = True
             else:
                 hivas["csucsido"] = False
@@ -128,5 +128,5 @@ print(f"A felhasználó {sum(mobil_hivasok)} percet beszélt mobil számmal és 
 # 6. feladat
 csucsidos_dijak = [hivas["dij"] for hivas in hivasok if hivas["csucsido"]]
 
-print(f"A felhasználónak {sum(csucsidos_dijak)} Forintot kell fizetnie a "
+print(f"A felhasználónak {sum(csucsidos_dijak):.2f} Forintot kell fizetnie a "
       "csúcsidős hívásokért.")
