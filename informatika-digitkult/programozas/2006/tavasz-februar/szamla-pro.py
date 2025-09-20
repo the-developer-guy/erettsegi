@@ -1,9 +1,7 @@
 import math
 
 def idobol_idobelyeg(ora, perc, masodperc):
-    idobelyeg = int(ora) * 60 * 60
-    + int(perc) * 60
-    + int(masodperc)
+    idobelyeg = int(ora) * 60 * 60 + int(perc) * 60 + int(masodperc)
 
     return idobelyeg
 
@@ -31,17 +29,17 @@ def megkezdett_perc(kezdet_idobelyeg, vege_idobelyeg):
     return math.ceil(hossz / 60)
 
 
-def hivas_dij(hossz, szam, csucsido):
+def percdij(szam, csucsido):
     if mobilszam(szam):
         if csucsido:
-            return hossz * 69.175
+            return 69.175
         else:
-            return hossz * 46.675
+            return 46.675
     else:
         if csucsido:
-            return hossz * 30
+            return 30
         else:
-            return hossz * 15
+            return 15
 
 
 # 1. feladat
@@ -92,7 +90,7 @@ with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
             else:
                 hivas["mobilszam"] = False
             
-            hivas["dij"] = hivas_dij(hivas["hossz"], szam, hivas["csucsido"])
+            hivas["dij"] = hivas["hossz"] * percdij(szam, hivas["csucsido"])
 
             hivasok.append(hivas)
             hivas = {}
