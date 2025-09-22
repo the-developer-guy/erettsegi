@@ -1,3 +1,5 @@
+# Teljes megoldás: https://youtu.be/b-mJFN8dT1Y
+
 import math
 
 def idobol_idobelyeg(ora, perc, masodperc):
@@ -43,6 +45,7 @@ def percdij(szam, csucsido):
 
 
 # 1. feladat
+# https://youtu.be/y6dxc5kyAbQ
 bekert_telefonszam = input("Adjon meg egy telefonszámot: ")
 
 if mobilszam(bekert_telefonszam):
@@ -52,6 +55,7 @@ else:
 
 
 # 2. feladat
+# https://youtu.be/smXjajYe3Ws
 hivas_kezdete = input("Adja meg egy hívás kezdetének időpontját (ó:p:m): ")
 hivas_vege = input("Adja meg egy hívás végének időpontját (ó:p:m): ")
 
@@ -90,12 +94,14 @@ with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
 
 
 # 3. feladat
+# https://youtu.be/wy1OfSRhME8
 with open("percek.txt", "wt", encoding="utf-8") as file:
     for hivas in hivasok:
         file.write(f"{hivas["hossz"]} {hivas["telefonszam"]}\n")
 
 
 # 4. feladat
+# https://youtu.be/6X7tFqwIxBE
 csucsidos_hivasok_szama = 0
 csucsidon_kivuli_hivasok_szama = 0
 for hivas in hivasok:
@@ -108,7 +114,8 @@ print(f"{csucsidos_hivasok_szama} hívás volt csúcsidőben és "
       f"{csucsidon_kivuli_hivasok_szama} hívás volt csúcsidőn kívül.")
 
 
-# 5. feladat 
+# 5. feladat
+# https://youtu.be/w7FwhaX7V7c
 mobil_hivasok = [hivas["hossz"] for hivas in hivasok if hivas["mobilszam"]]
 vezetekes_hivasok = [hivas["hossz"] for hivas in hivasok if not hivas["mobilszam"]]
 
@@ -117,6 +124,7 @@ print(f"A felhasználó {sum(mobil_hivasok)} percet beszélt mobil számmal és 
 
 
 # 6. feladat
+# https://youtu.be/QScZ-2ncTK8
 csucsidos_dijak = [hivas["dij"] for hivas in hivasok if hivas["csucsido"]]
 
 print(f"A felhasználónak {sum(csucsidos_dijak):.2f} Forintot kell fizetnie a "
