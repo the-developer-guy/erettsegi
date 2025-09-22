@@ -1,5 +1,7 @@
+# Teljes megoldás: https://youtu.be/zPF30Bq5zYI
 
 # 0. feladat
+# https://youtu.be/jEtF9UOMofo
 # Olvassuk be a lottosz.dat állományt, és tároljuk el a benne lévő adatokat
 
 lottoszamok = []
@@ -13,6 +15,7 @@ with open("lottosz.dat", "rt", encoding="utf-8") as file:
 
 
 # 1. feladat
+# https://youtu.be/HQz84ymABl8
 # Kérje be a felhasználótól az 52. hét megadott lottószámait!
 
 bekert_szamok = []
@@ -22,6 +25,7 @@ for i in range(5):
 
 
 # 2. feladat
+# https://youtu.be/lBJXCYuZP3s
 # A program rendezze a bekért lottószámokat emelkedő sorrendbe!
 # A rendezett számokat írja ki a képernyőre!
 
@@ -55,6 +59,7 @@ print(f"A(z) {bekert_het}. hét lottószámai: "
 
 
 # 5. feladat
+# https://youtu.be/DlqYLePN4Sk
 # A lottosz.dat állományból beolvasott adatok alapján döntse el,
 # hogy volt-e olyan szám, amit egyszer sem húztak ki az 51 hét alatt!
 # A döntés eredményét (Van/Nincs) írja ki a képernyőre!
@@ -71,6 +76,7 @@ else:
 
 
 # 6. feladat
+# https://youtu.be/eZdpt_GAMmE
 # A lottosz.dat állományban lévő adatok alapján állapítsa meg,
 # hogy hányszor volt páratlan szám a kihúzott lottószámok között!
 # Az eredményt a képernyőre írja ki!
@@ -85,6 +91,7 @@ print(f"{paratlan_szamlalo} db. páratlan szám volt az első 51 héten.")
 
 
 # 7. feladat
+# https://youtu.be/eppTs-uTtCo
 # Fűzze hozzá a lottosz.dat állományból beolvasott lottószámok után
 # a felhasználótól bekért, és rendezett 52. hét lottószámait,
 # majd írja ki az összes lottószámot a lotto52.ki szöveges fájlba!
@@ -103,6 +110,7 @@ with open("lotto52.ki", "wt", encoding="utf-8") as file:
 
 
 # 8. feladat
+# https://youtu.be/aNFKmMjoeC8
 # Határozza meg a lotto52.ki állomány adatai alapján,
 # hogy az egyes számokat hányszor húzták ki 2003-ban.
 # Az eredményt írja ki a képernyőre a következő formában:
