@@ -2,6 +2,7 @@
 
 import math
 
+
 def idobol_idobelyeg(ora, perc, masodperc):
     idobelyeg = int(ora) * 60 * 60 + int(perc) * 60 + int(masodperc)
 
@@ -87,7 +88,7 @@ with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
             hivas["telefonszam"] = szam
 
             hivas["mobilszam"] = mobilszam(szam)
-            
+
             hivas["dij"] = hivas["hossz"] * percdij(szam, hivas["csucsido"])
 
             hivasok.append(hivas)

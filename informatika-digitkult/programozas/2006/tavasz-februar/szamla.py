@@ -17,7 +17,7 @@ bekert_telefonszam = input("Adjon meg egy telefonszámot: ")
 # illetve mobil hívószám található.
 korzetszam = bekert_telefonszam[0] + bekert_telefonszam[1]
 
-# A mobil hívószámok: 39, 41, 71 kezdődnek, 
+# A mobil hívószámok: 39, 41, 71 kezdődnek,
 if korzetszam == "39" or korzetszam == "41" or korzetszam == "71":
     print("A megadott telefonszám mobil")
 # minden egyéb szám vezetékes hívószámnak felel meg.
@@ -86,7 +86,7 @@ with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
             percek_szama = hivas_hossz // 60
             if hivas_hossz % 60 != 0:
                 percek_szama += 1
-            
+
             hivas["hossz"] = percek_szama
             idopontok = False
         else:
@@ -110,7 +110,7 @@ with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
 # https://youtu.be/ONFK2JQza_w
 # Állapítsa meg a hivasok.txt fájlban lévő hívások időpontja alapján,
 # hogy hány számlázott percet telefonált a felhasználó hívásonként!
-# A kiszámított számlázott perceket írja ki a percek.txt fájlba 
+# A kiszámított számlázott perceket írja ki a percek.txt fájlba
 # a következő formában!
 # perc telefonszám
 
