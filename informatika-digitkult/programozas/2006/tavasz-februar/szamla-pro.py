@@ -1,3 +1,4 @@
+# E-Learning: https://elearning.tdg.hu/2006-februar/
 # Teljes megoldás: https://youtu.be/b-mJFN8dT1Y
 
 import math

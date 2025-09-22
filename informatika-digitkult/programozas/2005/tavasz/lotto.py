@@ -1,3 +1,4 @@
+# E-Learning: https://elearning.tdg.hu/2005-majus/
 # Teljes megoldás: https://youtu.be/dqg0cwCq-f8
 
 # 1. feladat

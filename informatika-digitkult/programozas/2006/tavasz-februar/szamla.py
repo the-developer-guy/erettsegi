@@ -1,3 +1,4 @@
+# E-Learning: https://elearning.tdg.hu/2006-februar/
 # Teljes megoldás: https://youtu.be/8Y7TdYf6dyM
 
 # 0. feladat
