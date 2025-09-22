@@ -1,8 +1,12 @@
+# Teljes megoldás: https://youtu.be/8Y7TdYf6dyM
+
 # 0. feladat
+# https://youtu.be/n574eVGgQ0M
 # A következő feladatokat oldja meg egy program segítségével!
 # A programot mentse szamla néven!
 
 # 1. feladat
+# https://youtu.be/WRx4uaiUKYs
 # Kérjen be a felhasználótól egy telefonszámot!
 # Állapítsa meg a program segítségével, hogy a telefonszám mobil-e vagy sem!
 # A megállapítást írja ki a képernyőre!
@@ -22,6 +26,7 @@ else:
 
 
 # 2. feladat
+# https://youtu.be/0gIUHsmYLWI
 # Kérjen be továbbá egy hívás kezdeti és hívás vége időpontot
 # óra perc másodperc formában!
 # A két időpont alapján határozza meg,
@@ -102,6 +107,7 @@ with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
 
 
 # 3. feladat
+# https://youtu.be/ONFK2JQza_w
 # Állapítsa meg a hivasok.txt fájlban lévő hívások időpontja alapján,
 # hogy hány számlázott percet telefonált a felhasználó hívásonként!
 # A kiszámított számlázott perceket írja ki a percek.txt fájlba 
@@ -114,6 +120,7 @@ with open("percek.txt", "wt", encoding="utf-8") as file:
 
 
 # 4. feladat
+# https://youtu.be/fKhbqLWSfmI
 # Állapítsa meg a hivasok.txt fájl adatai alapján,
 # hogy hány hívás volt csúcsidőben és csúcsidőn kívül!
 # Az eredményt jelenítse meg a képernyőn!
@@ -130,7 +137,8 @@ print(f"{csucsidos_hivasok_szama} hívás volt csúcsidőben és "
       f"{csucsidon_kivuli_hivasok_szama} hívás volt csúcsidőn kívül.")
 
 
-# 5. feladat 
+# 5. feladat
+# https://youtu.be/IdGJMnGVKfM
 # A hivasok.txt fájlban lévő időpontok alapján határozza meg,
 # hogy hány percet beszélt a felhasználó mobil számmal
 # és hány percet vezetékessel!
@@ -150,6 +158,7 @@ print(f"A felhasználó {mobil_perc} percet beszélt mobil számmal és "
 
 
 # 6. feladat
+# https://youtu.be/7sKQyNqhyF8
 # Összesítse a hivasok.txt fájl adatai alapján,
 # mennyit kell fizetnie a felhasználónak a csúcsdíjas hívásokért!
 # Az eredményt a képernyőn jelenítse meg!
