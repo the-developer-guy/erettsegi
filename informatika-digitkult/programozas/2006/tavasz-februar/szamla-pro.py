@@ -63,16 +63,13 @@ print(f"A megadott időtartam {percek_szama} percnek számít")
 
 hivasok = []
 with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
-    hivas = {}
     for i, line in enumerate(file):
         if i & 1 == 0:
+            hivas = {}
             hivas_reszek = line.split(" ")
-            hivas_kezdet_ora = int(hivas_reszek[0])
 
-            if 7 <= hivas_kezdet_ora < 18:
-                hivas["csucsido"] = True
-            else:
-                hivas["csucsido"] = False
+            hivas_kezdete_ora = int(hivas_reszek[0])
+            hivas["csucsido"] = 7 <= hivas_kezdete_ora < 18
 
             hivas_kezdet_idobelyeg = idobol_idobelyeg(hivas_reszek[0],
                                                       hivas_reszek[1],
@@ -85,15 +82,11 @@ with open("HIVASOK.TXT", "rt", encoding="utf-8") as file:
             szam = line.strip()
             hivas["telefonszam"] = szam
 
-            if mobilszam(szam):
-                hivas["mobilszam"] = True
-            else:
-                hivas["mobilszam"] = False
+            hivas["mobilszam"] = mobilszam(szam)
             
             hivas["dij"] = hivas["hossz"] * percdij(szam, hivas["csucsido"])
 
             hivasok.append(hivas)
-            hivas = {}
 
 
 # 3. feladat
