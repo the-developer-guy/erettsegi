@@ -70,11 +70,11 @@ for i in range(n-1):
             minimum_index = j
 
     if i != minimum_index:
-        csere = acids[i]
+        swap = acids[i]
         acids[i] = acids[minimum_index]
-        acids[minimum_index] = csere
+        acids[minimum_index] = swap
 
-acid_message = ""
+acid_message = "3. feladat:\n"
 for acid in acids:
     acid_message += f"{acid["name"]} {acid["weight"]}\n"
 print(acid_message, end="")
@@ -116,7 +116,7 @@ for acid in bsa:
 h -= (len(bsa) - 1) * 2
 o -= len(bsa) - 1
 
-formula = f"C {c} H {h} O {o} N {n} S {s}\n"
+formula = f"4. feladat:\nC {c} H {h} O {o} N {n} S {s}\n"
 print(formula, end="")
 output.write(formula)
 
@@ -130,16 +130,19 @@ output.write(formula)
 
 chains = []
 current_chain = {"start": 0, "chain": ""}
-for i, acid in enumerate(bsa):
+i = 0
+for acid in bsa:
     current_chain["chain"] += acid
     if acid == "Y" or acid == "W" or acid == "F":
         chains.append(current_chain)
         current_chain = {"start": i+1, "chain": ""}
+    i += 1
 chains.append(current_chain)
 
 max_i = 0
 max_len = 0
-for i, chain in enumerate(chains):
+for i in range(len(chains)):
+    chain = chains[i]
     length = len(chain["chain"])
     if length > max_len:
         max_len = length
@@ -149,7 +152,8 @@ longest_chain = chains[max_i]
 longest_chain_length = len(longest_chain["chain"])
 longest_chain_start = longest_chain["start"]+1
 longest_chain_end = longest_chain_start + longest_chain_length
-chain_message = f"leghosszabb lánc hossza: {longest_chain_length}, " \
+chain_message = "5. feladat:\n" \
+    f"leghosszabb lánc hossza: {longest_chain_length}, " \
     f"első aminosavának sorszáma: {longest_chain_start}, " \
     f"utolsó aminosavának sorszáma: {longest_chain_end}\n"
 
@@ -200,8 +204,9 @@ for acid in bsa:
     if acid == "C":
         c_count += 1
 
-c_count_message = f"A Factor XI-s hasítás után az első láncban {c_count} " \
-     "Cisztein található.\n"
+c_count_message = "6. feladat:\n" \
+    f"A Factor XI-s hasítás után az első láncban {c_count} " \
+    "Cisztein található.\n"
 print(c_count_message, end="")
 output.write(c_count_message)
 
