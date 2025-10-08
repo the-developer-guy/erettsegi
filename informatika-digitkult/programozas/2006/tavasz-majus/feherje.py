@@ -171,8 +171,8 @@ output.write(chain_message)
 
 count_index = len(bsa)
 for i in range(len(bsa)-1):
-    slice = bsa[i:i+2]
-    if slice == "RA" or slice == "RV":
+    part = bsa[i:i+2]
+    if part == "RA" or part == "RV":
         count_index = i
         break
 
@@ -181,8 +181,9 @@ for i in range(count_index):
     if bsa[i] == "C":
         c_count += 1
 
-c_count_message = f"A Factor XI-s hasítás után az első láncban {c_count} " \
-     "Cisztein található.\n"
+c_count_message = "6. feladat:\n" \
+    f"A Factor XI-s hasítás után az első láncban {c_count} " \
+    "Cisztein található.\n"
 print(c_count_message, end="")
 output.write(c_count_message)
 
