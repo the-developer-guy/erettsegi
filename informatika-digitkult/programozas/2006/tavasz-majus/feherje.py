@@ -1,3 +1,6 @@
+# E-Learning: https://elearning.tdg.hu/2006-majus/
+# Teljes megoldás: https://youtu.be/Vl4_mwN47ZY
+
 def get_aminoacid(acids, code):
     for acid in acids:
         if acid["letter"] == code:
@@ -6,6 +9,7 @@ def get_aminoacid(acids, code):
 
 
 # 1. feladat
+# https://youtu.be/VCcnHQxgA8k
 # Töltse be az aminosav.txt fájlból az aminosavak adatait!
 # A fájlban minden adat külön sorban található,
 # a fájl az aminosavak nevét nem tartalmazza.
@@ -36,6 +40,7 @@ with open("aminosav.txt", "rt", encoding="utf-8") as file:
 
 
 # 2. feladat
+# https://youtu.be/RPrcQe2u-IU
 # Határozza meg az aminosavak relatív molekulatömegét, ha
 # a szén atomtömege 12,
 # a hidrogéné 1,
@@ -52,10 +57,13 @@ for acid in acids:
     acid["weight"] = weight
 
 
+# 2,5. feladat
+# https://youtu.be/6VFXhPNA06s
 output = open("eredmeny.txt", "wt", encoding="utf-8")
 
 
 # 3. feladat
+# https://youtu.be/2kXXjxxRqMc
 # Rendezze növekvő sorrendbe az aminosavakat a relatív molekulatömeg szerint!
 # Írja ki a képernyőre és az eredmeny.txt fájlba
 # az aminosavak hárombetűs azonosítóját és a molekulatömeget!
@@ -82,6 +90,7 @@ output.write(acid_message)
 
 
 # 4. feladat
+# https://youtu.be/TjER6op6jEc
 # A bsa.txt a BSA nevű fehérje aminosav sorrendjét tartalmazza
 # egybetűs jelöléssel.
 # Határozza meg a fehérje összegképletét (azaz a C, H, O, N és S számát)!
@@ -122,6 +131,7 @@ output.write(formula)
 
 
 # 5. feladat
+# https://youtu.be/c7Eol2xGel4
 # Határozza meg, és írja ki képernyőre a Kimotripszin enzimmel széthasított
 # BSA lánc leghosszabb darabjának hosszát
 # és az eredeti láncban elfoglalt helyét
@@ -162,6 +172,7 @@ output.write(chain_message)
 
 
 # 6. feladat
+# https://youtu.be/oCOq5W3Juok
 # Egy másik enzim (a Factor XI) az Arginin (R) után hasít,
 # de csak akkor, ha Alinin (A) vagy Valin (V) követi.
 # Határozza meg, hogy a hasítás során keletkező első fehérjelánc részletben

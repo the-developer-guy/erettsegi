@@ -1,3 +1,6 @@
+# E-Learning: https://elearning.tdg.hu/2006-majus/
+# Teljes megoldás: https://youtu.be/1H4R57p79dI
+
 def double_print(message, filename="eredmeny.txt"):
     with open(filename, "at", encoding="utf-8") as file:
         file.write(message)
@@ -13,6 +16,7 @@ SULPHUR_WEIGHT = 32
 
 
 # 1. és 2. feladat
+# https://youtu.be/tLY9zLfy-Ic
 acids = []
 
 with open("aminosav.txt", "rt", encoding="utf-8") as file:
@@ -46,7 +50,12 @@ with open("aminosav.txt", "rt", encoding="utf-8") as file:
         name = file.readline()
 
 
+# 2,5. feladat
+# https://youtu.be/5_35-6L08yE
+
+
 # 3. feladat
+# https://youtu.be/R1e-qIsWv5s
 sorted_acids = sorted(acids, key=lambda acid: acid["weight"])
 acid_message = "3. feladat:\n"
 for acid in sorted_acids:
@@ -55,6 +64,7 @@ double_print(acid_message)
 
 
 # 4. feladat
+# https://youtu.be/9hVqAjh_7H0
 bsa = "GARFC" * 10
 
 bsa = ""
@@ -122,6 +132,7 @@ double_print("5. feladat\n"
 
 
 # 6. feladat
+# https://youtu.be/0t1zgeupui4
 ra_index = bsa.find("RA")
 rv_index = bsa.find("RV")
 
