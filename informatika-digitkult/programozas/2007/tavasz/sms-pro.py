@@ -24,55 +24,48 @@ def t9_encoder(text: str):
                 result += "0"
             case _:
                 pass
-    
+
     return result
 
-class T9_Word:
+
+class T9Word:
 
     def __init__(self, word: str):
-        self.word = word.strip()
-        self.code = t9_encoder(word)
+        self.__word = word.strip()
+        self.__code = t9_encoder(self.__word)
+
+    def get_code(self):
+        return self.__code
 
     def __len__(self):
-        return len(self.word)
-    
+        return len(self.__word)
+
     def __str__(self):
-        return self.word
+        return self.__word
 
 
 # 1. feladat
 letter = input("Adjon meg egy (kis)betűt: ")
-print(f"A(z) {letter} betű kódja: {t9_encoder(letter)}")
+print(f"A(z) \"{letter}\" betű kódja: {t9_encoder(letter)}")
 
 
 # 2. feladat
-# Kérjen be a felhasználótól egy szót, és határozza meg,
-# hogy milyen számsorral lehet ezt a telefonba bevinni!
-# Az eredményt írassa a képernyőre!
-
 word = input("Adjon meg egy szót: ")
 print(f"A(z) \"{word}\" szót a {t9_encoder(word)} kóddal lehet a telefonba bevinni.")
 
 
 # 3. feladat
-# Olvassa be a szavak.txt fájlból a szavakat,
-# és a továbbiakban azokkal dolgozzon!
-
 words = []
 code_count = {}
 with open("szavak.txt", "rt", encoding="utf-8") as file:
     for line in file:
-        w = T9_Word(line)
+        w = T9Word(line)
         words.append(w)
 
-        code_count[w.code] = code_count.get(w.code, 0) + 1
+        code_count[w.get_code()] = code_count.get(w.get_code(), 0) + 1
 
 
 # 4. feladat
-# Határozza meg és írassa a képernyőre, hogy melyik a leghosszabb tárolt szó!
-# Amennyiben több azonos hosszúságú van, elegendő csak az egyiket megjeleníteni.
-# Adja meg ennek a szónak a hosszát is!
-
 longest_word = words[0]
 for word in words:
     if len(word) > len(longest_word):
@@ -83,9 +76,6 @@ print(f"A leghosszabb szó: \"{longest_word}\", "
 
 
 # 5. feladat
-# Határozza meg és írassa a képernyőre, hogy hány rövid szó található a fájlban!
-# Rövid szónak tekintjük a legfeljebb 5 karakterből álló szavakat.
-
 short_word_count = 0
 for word in words:
     if len(word) <= 5:
@@ -95,23 +85,14 @@ print(f"A fáljban {short_word_count} db. rövid szó található.")
 
 
 # 6. feladat
-# Írassa a kodok.txt állományba a szavak.txt fájlban található szavaknak
-# megfelelő számkódokat!
-# Minden szónak feleljen meg egy számkód,
-# és minden számkód külön sorba kerüljön!
-
 with open("kodok.txt", "wt", encoding="utf-8") as file:
     for word in words:
-        file.write(f"{word.code}\n")
+        file.write(f"{word.get_code()}\n")
 
 
 # 7. feladat
-# Kérjen be a felhasználótól egy számsort, és határozza meg,
-# hogy melyik szó tartozhat hozzá!
-# Amennyiben több szó is megfelelő, akkor mindegyiket írassa ki!
-
 requested_code = input("Adjon meg egy számsort: ")
-specific_words = [str(word) for word in words if word.code == requested_code]
+specific_words = [str(word) for word in words if word.get_code() == requested_code]
 if len(specific_words) == 0:
     print(f"Nem tartozik szó a(z) {requested_code} kódhoz.")
 else:
@@ -120,30 +101,20 @@ else:
 
 
 # 8. feladat
-# Határozza meg, hogy a szógyűjteményben mely kódokhoz tartozik több szó is!
-# Írassa ki a képernyőre ezeket a szavakat a kódjukkal együtt egymás mellé...
-
 multiword_codes = [code for code in code_count if code_count[code] > 1]
 print("Az alábbi kódokhoz tartozik több szó is:")
 print_items = []
 for word in words:
-    if word.code in multiword_codes:
-        print_items.append(f"{word} : {word.code}")
+    if word.get_code() in multiword_codes:
+        print_items.append(f"{word} : {word.get_code()}")
 print(*print_items, sep="; ")
 
 
 # 9. feladat
-# Határozza meg, hogy melyik kódnak megfelelő szóból van a legtöbb!
-# Írassa ki a képernyőre a kódot, és a kódhoz tartozó összes tárolt szót!
-
-most_frequent_code_count = 0
-most_frequent_code = None
-for code in code_count:
-    if code_count[code] > most_frequent_code_count:
-        most_frequent_code_count = code_count[code]
-        most_frequent_code = code
+sorted_codes = sorted(code_count.items(), key=lambda item: item[1])
+most_frequent_code = sorted_codes[-1][0]
 
 print(f"A leggyakoribb számsor: {most_frequent_code}. A hozzá tartozó szavak:")
 for word in words:
-    if word.code == most_frequent_code:
+    if word.get_code() == most_frequent_code:
         print(f"- {word}")
