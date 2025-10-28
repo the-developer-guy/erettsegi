@@ -16,7 +16,7 @@ code_table = {
     "w": 9, "x": 9, "y": 9, "z": 9
 }
 
-print(f"A(z) {letter} betű kódja: {code_table[letter]}")
+print(f"A(z) {letter} betű kódja: {code_table[letter]}.")
 
 
 # 2. feladat
@@ -40,6 +40,7 @@ def t9_encoder(word):
         result += code_table[letter]
     
     return result
+
 
 word = input("Adjon meg egy szót: ")
 print(f"A(z) \"{word}\" szót a {t9_encoder(word)} kóddal lehet a telefonba bevinni.")
