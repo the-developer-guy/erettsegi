@@ -133,6 +133,7 @@ for word in words:
         print(f"{word["word"]} : {word["code"]}; ", end="")
 print()
 
+
 # 9. feladat
 # Határozza meg, hogy melyik kódnak megfelelő szóból van a legtöbb!
 # Írassa ki a képernyőre a kódot, és a kódhoz tartozó összes tárolt szót!

@@ -20,8 +20,10 @@ def t9_encoder(text: str):
                 result += "8"
             case "w" | "x" | "y" | "z":
                 result += "9"
-            case " " | "." | "," | "?" | "!":
+            case " ":
                 result += "0"
+            case "." | "," | "?" | "!":
+                result += "1"
             case _:
                 pass
 
@@ -102,11 +104,11 @@ else:
 
 # 8. feladat
 multiword_codes = [code for code in code_count if code_count[code] > 1]
-print("Az alábbi kódokhoz tartozik több szó is:")
 print_items = []
 for word in words:
     if word.get_code() in multiword_codes:
         print_items.append(f"{word} : {word.get_code()}")
+print("Az alábbi kódokhoz tartozik több szó is:")
 print(*print_items, sep="; ")
 
 
