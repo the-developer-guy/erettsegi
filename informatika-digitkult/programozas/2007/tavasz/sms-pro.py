@@ -1,3 +1,6 @@
+# E-Learning: https://elearning.tdg.hu/2007-majus/
+# Teljes megoldás: https://youtu.be/gA_73xqlrrY
+
 def t9_encoder(text: str):
     result = ""
 
@@ -47,16 +50,19 @@ class T9Word:
 
 
 # 1. feladat
+# https://youtu.be/J1L0K9c_rLs
 letter = input("Adjon meg egy (kis)betűt: ")
 print(f"A(z) \"{letter}\" betű kódja: {t9_encoder(letter)}")
 
 
 # 2. feladat
+# https://youtu.be/cAJLJ9y0ETc
 word = input("Adjon meg egy szót: ")
 print(f"A(z) \"{word}\" szót a {t9_encoder(word)} kóddal lehet a telefonba bevinni.")
 
 
 # 3. feladat
+# https://youtu.be/JEWPBV3lAWI
 words = []
 code_count = {}
 with open("szavak.txt", "rt", encoding="utf-8") as file:
@@ -68,6 +74,7 @@ with open("szavak.txt", "rt", encoding="utf-8") as file:
 
 
 # 4. feladat
+# https://youtu.be/H7L9zecRD-E
 longest_word = words[0]
 for word in words:
     if len(word) > len(longest_word):
@@ -78,6 +85,7 @@ print(f"A leghosszabb szó: \"{longest_word}\", "
 
 
 # 5. feladat
+# https://youtu.be/k9fY_7EOWjk
 short_word_count = 0
 for word in words:
     if len(word) <= 5:
@@ -87,12 +95,14 @@ print(f"A fáljban {short_word_count} db. rövid szó található.")
 
 
 # 6. feladat
+# https://youtu.be/0D14jAQuz3M
 with open("kodok.txt", "wt", encoding="utf-8") as file:
     for word in words:
         file.write(f"{word.get_code()}\n")
 
 
 # 7. feladat
+# https://youtu.be/GSmbPoPou5I
 requested_code = input("Adjon meg egy számsort: ")
 specific_words = [str(word) for word in words if word.get_code() == requested_code]
 if len(specific_words) == 0:
@@ -103,6 +113,7 @@ else:
 
 
 # 8. feladat
+# https://youtu.be/gVP2nA3ShX0
 multiword_codes = [code for code in code_count if code_count[code] > 1]
 print_items = []
 for word in words:
@@ -113,6 +124,7 @@ print(*print_items, sep="; ")
 
 
 # 9. feladat
+# https://youtu.be/zFV6bWXgyjA
 sorted_codes = sorted(code_count.items(), key=lambda item: item[1])
 most_frequent_code = sorted_codes[-1][0]
 

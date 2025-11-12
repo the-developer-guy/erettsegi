@@ -1,4 +1,8 @@
+# E-Learning: https://elearning.tdg.hu/2007-majus/
+# Teljes megoldás: https://youtu.be/9RgdLmvrIb4
+
 # 1. feladat
+# https://youtu.be/nCrVCWLwg0M
 # Kérjen be a felhasználótól egy betűt,
 # és adja meg, hogy milyen kód (szám) tartozik hozzá!
 # Az eredményt írassa a képernyőre!
@@ -20,6 +24,7 @@ print(f"A(z) {letter} betű kódja: {code_table[letter]}.")
 
 
 # 2. feladat
+# https://youtu.be/xNic_kYzvyg
 # Kérjen be a felhasználótól egy szót, és határozza meg,
 # hogy milyen számsorral lehet ezt a telefonba bevinni!
 # Az eredményt írassa a képernyőre!
@@ -47,6 +52,7 @@ print(f"A(z) \"{word}\" szót a {t9_encoder(word)} kóddal lehet a telefonba bev
 
 
 # 3. feladat
+# https://youtu.be/hfVa46MQT6Q
 # Olvassa be a szavak.txt fájlból a szavakat,
 # és a továbbiakban azokkal dolgozzon!
 
@@ -70,6 +76,7 @@ with open("szavak.txt", "rt", encoding="utf-8") as file:
 
 
 # 4. feladat
+# https://youtu.be/SRwODaioo3Y
 # Határozza meg és írassa a képernyőre, hogy melyik a leghosszabb tárolt szó!
 # Amennyiben több azonos hosszúságú van, elegendő csak az egyiket megjeleníteni.
 # Adja meg ennek a szónak a hosszát is!
@@ -84,6 +91,7 @@ print(f"A leghosszabb szó: \"{longest_word["word"]}\", "
 
 
 # 5. feladat
+# https://youtu.be/0gC8ZfqWqPk
 # Határozza meg és írassa a képernyőre, hogy hány rövid szó található a fájlban!
 # Rövid szónak tekintjük a legfeljebb 5 karakterből álló szavakat.
 
@@ -96,6 +104,7 @@ print(f"A fáljban {short_word_count} db. rövid szó található.")
 
 
 # 6. feladat
+# https://youtu.be/xYmmylypSUE
 # Írassa a kodok.txt állományba a szavak.txt fájlban található szavaknak
 # megfelelő számkódokat!
 # Minden szónak feleljen meg egy számkód,
@@ -107,6 +116,7 @@ with open("kodok.txt", "wt", encoding="utf-8") as file:
 
 
 # 7. feladat
+# https://youtu.be/2nJZT7IybJE
 # Kérjen be a felhasználótól egy számsort, és határozza meg,
 # hogy melyik szó tartozhat hozzá!
 # Amennyiben több szó is megfelelő, akkor mindegyiket írassa ki!
@@ -119,6 +129,7 @@ for word in words:
 
 
 # 8. feladat
+# https://youtu.be/jf59hRGPk0k
 # Határozza meg, hogy a szógyűjteményben mely kódokhoz tartozik több szó is!
 # Írassa ki a képernyőre ezeket a szavakat a kódjukkal együtt egymás mellé...
 
@@ -135,6 +146,7 @@ print()
 
 
 # 9. feladat
+# https://youtu.be/iI-bIUc8dsA
 # Határozza meg, hogy melyik kódnak megfelelő szóból van a legtöbb!
 # Írassa ki a képernyőre a kódot, és a kódhoz tartozó összes tárolt szót!
 
