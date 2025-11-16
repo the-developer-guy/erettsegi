@@ -129,6 +129,19 @@ for i in range(1, len(girlfriend_messages)):
 # majd tárolja el a memóriában a többihez hasonlóan!
 
 print("7. feladat:")
+hour = input("Adja meg az üzenet óráját: ")
+minute = input("Adja meg az üzenet percét: ")
+sender = input("Adja meg az üzenet küldőjének telefonszámát: ")
+content = input("Adja meg az üzenet tartalmát: ")
+message = {
+    "hour": int(hour),
+    "minute": int(minute),
+    "timestamp": int(hour)*60 + int(minute),
+    "sender": sender,
+    "message": content,
+    "length": len(content)
+}
+messages.append(message)
 
 # 8. feladat
 # Az smski.txt állományban készítsen egy listát az üzenetekről 
