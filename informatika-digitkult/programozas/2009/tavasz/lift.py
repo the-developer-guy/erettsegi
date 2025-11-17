@@ -1,0 +1,151 @@
+import random
+
+# 1. feladat
+# Olvassa be az igeny.txt állományban talált adatokat,
+# s azok felhasználásával oldja meg a következő feladatokat!
+
+requests = []
+with open("igeny.txt", "rt", encoding="utf-8") as file:
+    floor_count = int(file.readline())
+    team_count = int(file.readline())
+    for line in file:
+        parts = line.strip().split(" ")
+        request = {
+            "hour": int(parts[0]),
+            "minute": int(parts[1]),
+            "second": int(parts[2]),
+            "team": int(parts[3]),
+            "start_floor": int(parts[4]),
+            "target_floor": int(parts[5])
+        }
+        requests.append(request)
+
+
+# 2. feladat
+# Tudjuk, hogy a megfigyelés kezdetén a lift éppen áll.
+# Kérje be a felhasználótól, hogy melyik szinten áll a lift,
+# és a további részfeladatok megoldásánál ezt vegye figyelembe!
+
+lift_start_position = int(input("Adja meg a lift tartózkodási emeletét: "))
+
+
+# 3. feladat
+# Határozza meg, hogy melyik szinten áll majd a lift
+# az utolsó kérés teljesítését követően!
+
+last_request = requests[-1]
+print(f"A lift a {last_request["target"]}. szinten áll az utolsó igény teljesítése után.")
+
+
+# 4. feladat
+# Írja a képernyőre, hogy a megfigyelés kezdete és az utolsó igény teljesítése
+# között melyik volt a legalacsonyabb
+# és melyik a legmagasabb sorszámú szint, amelyet a lift érintett!
+
+highest_floor = lift_start_position
+lowest_floor = lift_start_position
+for request in requests:
+    if request["start_floor"] > highest_floor:
+        highest_floor = request["start_floor"]
+    if request["target_floor"] > highest_floor:
+        highest_floor = request["target_floor"]
+    
+    if request["start_floor"] < lowest_floor:
+        lowest_floor = request["start_floor"]
+    if request["target_floor"] < lowest_floor:
+        lowest_floor = request["target_floor"]
+
+
+# 5. feladat
+# Határozza meg, hogy hányszor kellett a liftnek felfelé indulnia utassal
+# és hányszor utas nélkül!
+# Az eredményt jelenítse meg a képernyőn!
+
+travel_up_with_passengers_count = 0
+travel_up_empty_count = 0
+lift_current_position = lift_start_position
+for request in requests:
+    if request["start_floor"] > lift_current_position:
+        travel_up_empty_count += 1
+    if request["target_floor"] > request["start_floor"]:
+        travel_up_with_passengers_count += 1
+    lift_current_position = request["target_floor"]
+
+
+# 6. feladat
+# Határozza meg, hogy mely szerelőcsapatok nem vették igénybe a liftet
+# a vizsgált intervallumban!
+# A szerelőcsapatok sorszámát egymástól egy-egy szóközzel elválasztva
+# írja a képernyőre!
+
+travelled_teams = set()
+for request in requests:
+    travelled_teams.add(request["team"])
+if len(travelled_teams) == team_count:
+    print("Minden csapat használta a liftet")
+else:
+    print("A következő csapatok nem vették igénybe a liftet: ", end="")
+    for team_number in range(1, team_count+1):
+        if team_number not in  travelled_teams:
+            print(team_number, end=" ")
+    print()
+
+
+# 7. feladat
+# Előfordul, hogy egyik vagy másik szerelőcsapat áthágja a szabályokat,
+# és egyik szintről gyalog megy a másikra.
+# (Ezt onnan tudhatjuk, hogy más emeleten igényli a liftet, mint ahova
+# korábban érkezett.)
+# Generáljon véletlenszerűen egy létező csapatsorszámot!
+# Határozza meg, hogy a vizsgált időszak igényei alapján lehet-e egyértelműen
+# bizonyítani, hogy ez a csapat vétett a szabályok ellen!
+# Ha igen, akkor adja meg, hogy melyik két szint közötti utat tették meg gyalog,
+# ellenkező esetben írja ki a Nem bizonyítható szabálytalanság szöveget!
+
+generated_team_number = random.randint(1, team_count)
+violations = []
+last_request = None
+for request in requests:
+    if request["team"] == generated_team_number:
+        if last_request is not None:
+            if last_request["target_floor"] != last_request["start_floor"]:
+                violations.append(
+                    (last_request["target_floor"], last_request["start_floor"]))
+        last_request = request
+
+if len(violations) == 0:
+    print("Nem bizonyítható szabálytalanság")
+else:
+    print("A következő szintek között szegte meg a szabályokat a "
+          f"{generated_team_number}. számú csapat:")
+    for violation in violations:
+        print(f"- {violation[0]}. és {violation[1]}.")
+
+
+# 8. feladat
+# A munkák elvégzésének adminisztrálásához minden csapatnak egy blokkoló kártyát
+# kell használnia. A kártyára a liftben elhelyezett blokkolóóra rögzíti az
+# emeletet, az időpontot. Ennek a készüléknek a segítségével kell megadni a
+# munka kódszámát és az adott munkafolyamat sikerességét.
+# A munka kódja 1 és 99 közötti egész szám lehet. A sikerességet
+# a „befejezett” és a „befejezetlen” szavakkal lehet jelezni.
+# Egy műszaki hiba folytán az előző feladatban vizsgált csapat kártyájára az
+# általunk nyomon követett időszakban nem került bejegyzés. Ezért a
+# csapatfőnöknek a műszak végén pótolnia kell a hiányzó adatokat. Az igeny.txt
+# állomány adatait felhasználva írja a képernyőre időrendben, hogy a vizsgált
+# időszakban milyen kérdéseket tett fel az óra, és kérje be az adott válaszokat
+# a felhasználótól! A pótlólag feljegyzett adatokat írja a blokkol.txt
+# állományba! A blokkol.txt állomány tartalmát az alábbi sorok mintájára
+# alakítsa ki:
+# Befejezés ideje: 9:23:11
+# Sikeresség: befejezett
+# -----
+# Indulási emelet: 9
+# Célemelet: 11
+# Feladatkód: 23
+# Befejezés ideje: 10:43:22
+# Sikeresség: befejezetlen
+# -----
+# Indulási emelet: 11
+# Célemelet: 6
+# Feladatkód: 6
