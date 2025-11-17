@@ -10,21 +10,20 @@ messages = []
 with open("sms.txt", "rt", encoding="utf-8") as file:
     count = int(file.readline())
     for message_index in range(count):
-        message_data = file.readline()
-        message_content = file.readline()
+        message_data = file.readline().strip()
+        message_content = file.readline().strip()
 
         data_parts = message_data.split(" ")
 
         message = {
-            "hour": int(message_data[0]),
-            "minute": int(message_data[1]),
-            "timestamp": int(message_data[0])*60 + int(message_data[1]),
-            "sender": message_data[2],
+            "hour": int(data_parts[0]),
+            "minute": int(data_parts[1]),
+            "timestamp": int(data_parts[0])*60 + int(data_parts[1]),
+            "sender": data_parts[2],
             "message": message_content,
             "length": len(message_content)
         }
 
-        messages.append(message)
 
 
 # 2. feladat
