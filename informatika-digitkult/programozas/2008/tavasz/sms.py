@@ -8,22 +8,23 @@
 
 messages = []
 with open("sms.txt", "rt", encoding="utf-8") as file:
-    count = int(file.readline())
-    for message_index in range(count):
+    message_count = int(file.readline())
+    for message_index in range(message_count):
         message_data = file.readline().strip()
         message_content = file.readline().strip()
 
         data_parts = message_data.split(" ")
+        hour = int(data_parts[0])
+        minute = int(data_parts[1])
 
         message = {
-            "hour": int(data_parts[0]),
-            "minute": int(data_parts[1]),
-            "timestamp": int(data_parts[0])*60 + int(data_parts[1]),
-            "sender": data_parts[2],
+            "hour": hour,
+            "minute": minute,
+            "timestamp": hour*60 + minute,
+            "sender": int(data_parts[2]),
             "message": message_content,
             "length": len(message_content)
         }
-
 
 
 # 2. feladat
@@ -36,6 +37,9 @@ if len(messages) < 10:
     last_message = messages[i]
 else:
     last_message = messages[9]
+
+print("A telefonban a következő üzenet a legfrissebb:\n"
+      f"{last_message["message"]}")
 
 
 # 3. feladat
@@ -53,6 +57,13 @@ for message in messages:
         longest_message = message
     if message["length"] < shortest_message["length"]:
         shortest_message = message
+
+print("A legrövidebb üzenet: "
+      f"{shortest_message["hour"]}, {shortest_message["minute"]}, "
+      f"{shortest_message["sender"]}, {shortest_message["message"]}")
+print("A leghosszabb üzenet: "
+      f"{longest_message["hour"]}, {longest_message["minute"]}, "
+      f"{longest_message["sender"]}, {longest_message["message"]}")
 
 
 # 4. feladat
@@ -82,6 +93,7 @@ print(f"1-20: {stat[0]}\n"
       f"61-80: {stat[3]}\n"
       f"81-100: {stat[4]}")
 
+
 # 5. feladat
 # Ha Ernő minden óra 0. percében elolvasná a memóriában lévő üzeneteket 
 # (az éppen ekkor érkező üzeneteket nem látja), majd ki is törölné, 
@@ -100,6 +112,8 @@ for message in messages:
     hourly_message_count += 1
     if hourly_message_count > 10:
         unread_message_count += 1
+
+print(f"{unread_message_count} üzenethez kellene felhívni a szolgáltatót.")
 
 
 # 6. feladat
@@ -121,6 +135,14 @@ for i in range(1, len(girlfriend_messages)):
     if difference > max_message_difference:
         max_message_difference = difference
 
+if len(max_message_difference) < 2:
+    print("nincs elegendő üzenet")
+else:
+    max_difference_hour = max_message_difference // 60
+    max_difference_minute = max_message_difference % 60
+    print("A leghosszabb idő ami Ernő barátnőjének két üzenete közt telt el: "
+          f"{max_difference_hour} {max_difference_minute}")
+
 
 # 7. feladat
 # Egy üzenet véletlenül késett.
@@ -136,11 +158,12 @@ message = {
     "hour": int(hour),
     "minute": int(minute),
     "timestamp": int(hour)*60 + int(minute),
-    "sender": sender,
+    "sender": int(sender),
     "message": content,
     "length": len(content)
 }
 messages.append(message)
+
 
 # 8. feladat
 # Az smski.txt állományban készítsen egy listát az üzenetekről 
