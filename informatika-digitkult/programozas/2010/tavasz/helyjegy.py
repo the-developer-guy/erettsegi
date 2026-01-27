@@ -8,18 +8,18 @@ with open("eladott.txt", "rt", encoding="utf-8") as file:
     sold_ticket_count = int(travel_info[0])
     ride_length = int(travel_info[1])
     fare = int(travel_info[2])
-    ticket_count = 1
+    ticket_id = 1
     for line in file:
         ticket_parts = line.split(" ")
         passenger = {
-            "id": ticket_count,
+            "id": ticket_id,
             "seat": int(ticket_parts[0]),
             "board": int(ticket_parts[1]),
             "alight": int(ticket_parts[2]),
             "price": 0
         }
         passengers.append(passenger)
-        ticket_count += 1
+        ticket_id += 1
 
 # 2. feladat
 # Adja meg a legutolsó jegyvásárló ülésének sorszámát és az általa beutazott

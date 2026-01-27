@@ -66,7 +66,7 @@ print(f"Az utolsó út {last_ride["distance"]} km hosszú volt.")
 
 days_with_ride = set()
 for ride in rides:
-    days_with_ride.add(ride[""])
+    days_with_ride.add(ride["day"])
 
 print("A futár a következő napokon nem dolgozott:")
 for i in range(1, 8):
@@ -84,12 +84,12 @@ for ride in rides:
     i = ride["day"]
     ride_counter[i] += 1
 
-max_ride = 0
-for i in range(7):
-    if ride_counter[i] > ride_counter[max_ride]:
-        max_ride = i
+max_ride_index = 0
+for i in range(1, 7):
+    if ride_counter[i] > ride_counter[max_ride_index]:
+        max_ride_index = i
 
-print(f"A(z) {i+1}. napon volt a legtöbb fuvar.")
+print(f"A(z) {max_ride_index+1}. napon volt a legtöbb fuvar.")
 
 
 # 6. feladat

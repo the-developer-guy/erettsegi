@@ -8,6 +8,7 @@ requests = []
 with open("igeny.txt", "rt", encoding="utf-8") as file:
     floor_count = int(file.readline())
     team_count = int(file.readline())
+    request_count = int(file.readline())
     for line in file:
         parts = line.strip().split(" ")
         request = {
@@ -33,7 +34,7 @@ lift_start_position = int(input("Adja meg a lift tartózkodási emeletét: "))
 # Határozza meg, hogy melyik szinten áll majd a lift
 # az utolsó kérés teljesítését követően!
 
-last_request = requests[-1]
+last_request = requests[len(requests)-2]
 print(f"A lift a {last_request["target"]}. szinten áll az utolsó igény teljesítése után.")
 
 
@@ -86,7 +87,7 @@ if len(travelled_teams) == team_count:
 else:
     print("A következő csapatok nem vették igénybe a liftet: ", end="")
     for team_number in range(1, team_count+1):
-        if team_number not in  travelled_teams:
+        if team_number not in travelled_teams:
             print(team_number, end=" ")
     print()
 
@@ -103,15 +104,17 @@ else:
 # ellenkező esetben írja ki a Nem bizonyítható szabálytalanság szöveget!
 
 generated_team_number = random.randint(1, team_count)
-violations = []
-last_request = None
+team_requests = []
 for request in requests:
     if request["team"] == generated_team_number:
-        if last_request is not None:
-            if last_request["target_floor"] != last_request["start_floor"]:
-                violations.append(
-                    (last_request["target_floor"], last_request["start_floor"]))
-        last_request = request
+        team_requests.append(request)
+
+violations = []
+for i in range(1, len(team_requests)):
+    last_floor = team_requests[i-1]["target_floor"]
+    next_floor = team_requests[i]["start_floor"]
+    if last_floor != next_floor:
+        violations.append((last_floor, next_floor))
 
 if len(violations) == 0:
     print("Nem bizonyítható szabálytalanság")
@@ -149,3 +152,21 @@ else:
 # Indulási emelet: 11
 # Célemelet: 6
 # Feladatkód: 6
+
+with open("blokkol.txt", "wt", encoding="utf-8") as file:
+    for request in team_requests:
+        h = request["hour"]
+        m = request["minute"]
+        s = request["second"]
+        success = input(f"Adja meg, hogy a {h}:{m}:{s}-kor befejezett munka "
+                        "sikeres volt-e (i/n)")
+        job_code = int(input("Adja meg a következő munka kódját (1-99): "))
+
+        file.write(f"Befejezés ideje: {h}:{m}:{s}")
+        if success == "i":
+            file.write("Sikeresség: befejezett\n-----\n")
+        else:
+            file.write("Sikeresség: befejezetlen\n-----\n")
+        file.write(f"Indulási emelet: {request["start_floor"]}\n"
+                   f"Célemelet: {request["target_floor"]}\n"
+                   f"Feladatkód: {job_code}\n")

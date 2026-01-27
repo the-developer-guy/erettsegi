@@ -34,7 +34,7 @@ else:
 # azaz a teljes szöveget ne tárolja a memóriában!
 
 with open("szoveg.txt", "rt", encoding="utf-8") as file:
-    longest_word = ""
+    longest_word = file.readline().strip()
     for line in file:
         word = line.strip()
         if len(word) > len(longest_word):
