@@ -1,3 +1,4 @@
+import math
 # 1. feladat
 # Olvassa be az eladott.txt állományban talált adatokat, s azok felhasználásával
 # oldja meg a következő feladatokat!
@@ -11,12 +12,15 @@ with open("eladott.txt", "rt", encoding="utf-8") as file:
     ticket_id = 1
     for line in file:
         ticket_parts = line.split(" ")
+        board = int(ticket_parts[1])
+        alight = int(ticket_parts[2])
+        distance = alight-board
         passenger = {
             "id": ticket_id,
             "seat": int(ticket_parts[0]),
-            "board": int(ticket_parts[1]),
-            "alight": int(ticket_parts[2]),
-            "price": 0
+            "board": board,
+            "alight": alight,
+            "price": math.ceil(distance/10) * fare
         }
         passengers.append(passenger)
         ticket_id += 1
@@ -25,6 +29,7 @@ with open("eladott.txt", "rt", encoding="utf-8") as file:
 # Adja meg a legutolsó jegyvásárló ülésének sorszámát és az általa beutazott
 # távolságot! A kívánt adatokat a képernyőn jelenítse meg!
 
+print("2. feladat")
 last_passenger = passengers[-1]
 print(f"Az utolsó jegyvásárló a(z) {last_passenger["seat"]}. számú ülésen "
       f"utazott, és {last_passenger["alight"]-last_passenger["board"]} "
@@ -35,6 +40,7 @@ print(f"Az utolsó jegyvásárló a(z) {last_passenger["seat"]}. számú ülése
 # Listázza ki, kik utazták végig a teljes utat!
 # Az utasok sorszámát egy-egy szóközzel elválasztva írja a képernyőre!
 
+print("3. feladat")
 long_traveling_passengers = []
 for passenger in passengers:
     if passenger["board"] == 0 and passenger["alight"] == ride_length:
@@ -52,6 +58,7 @@ else:
 # Határozza meg, hogy a jegyekből mennyi bevétele származott a társaságnak!
 # Az eredményt írja a képernyőre!
 
+print("4. feladat")
 income = 0
 for passenger in passengers:
     income += passenger["price"]
@@ -62,6 +69,7 @@ print(f"A társaságnak {income} Ft bevétele származott.")
 # Írja a képernyőre, hogy a busz végállomást megelőző utolsó megállásánál
 # hányan szálltak fel és le!
 
+print("5. feladat")
 stops = set()
 for passenger in passengers:
     stops.add(passenger["board"])
@@ -69,11 +77,25 @@ for passenger in passengers:
 sorted_stops = list(stops)
 sorted_stops.sort()
 
+last_stop = sorted_stops[-2]
+boarding_passenger_count = 0
+alighting_passenger_count = 0
+
+for passenger in passengers:
+    if passenger["board"] == last_stop:
+        boarding_passenger_count += 1
+    elif passenger["alight"] == last_stop:
+        alighting_passenger_count += 1
+
+print(f"A végállomást megelőző utolsó megállónál {boarding_passenger_count} "
+      f"utas szállt fel, és {alighting_passenger_count} szállt le.")
+
 
 # 6. feladat
 # Adja meg, hogy hány helyen állt meg a busz a kiinduló állomás és a
 # célállomás között! Az eredményt írja a képernyőre!
 
+print("6. feladat")
 print(f"A busz {len(stops)-2} helyen állt meg.")
 
 
@@ -87,6 +109,7 @@ print(f"A busz {len(stops)-2} helyen állt meg.")
 # Az üres helyek esetén az „üres” szót jelenítse meg!
 # Minden ülés külön sorba kerüljön!
 
+print("7. feladat")
 list_distance = int(input("Adja meg az utaslistához szükséges távot: "))
 occupied_seats = {}
 for passenger in passengers:
@@ -99,4 +122,4 @@ with open("kihol.txt", "wt", encoding="utf-8") as file:
         if i in occupied_seats:
             file.write(f"{i}. ülés: {occupied_seats[i]}. utas\n")
         else:
-            file.write(f"{i}. ülés: üres")
+            file.write(f"{i}. ülés: üres\n")
