@@ -45,8 +45,8 @@ print("A telefonban a következő üzenet a legfrissebb:\n"
 # 3. feladat
 # Adja meg a leghosszabb és a legrövidebb üzenetek adatait!
 # Ha több azonos hosszúságú üzenet van, akkor elegendő csak egyet-egyet
-# megadnia! A képernyőn 
-# óra, perc, telefonszám, üzenet 
+# megadnia! A képernyőn
+# óra, perc, telefonszám, üzenet
 # formában jelenítse meg az adatokat!
 
 print("3. feladat:")
@@ -67,7 +67,7 @@ print("A leghosszabb üzenet: "
 
 
 # 4. feladat
-# Készítsen karakterhossz szerinti statisztikát: 
+# Készítsen karakterhossz szerinti statisztikát:
 # 1-20, 21-40, 41-60, 61-80, 81-100!
 # Az intervallumok mellé a hozzájuk tartozó üzenetek darabszámát írja,
 # mint eredményt a képernyőre!
@@ -95,9 +95,9 @@ print(f"1-20: {stat[0]}\n"
 
 
 # 5. feladat
-# Ha Ernő minden óra 0. percében elolvasná a memóriában lévő üzeneteket 
-# (az éppen ekkor érkező üzeneteket nem látja), majd ki is törölné, 
-# akkor hány olyan üzenet lenne, amelynek elolvasásához fel kellene hívnia 
+# Ha Ernő minden óra 0. percében elolvasná a memóriában lévő üzeneteket
+# (az éppen ekkor érkező üzeneteket nem látja), majd ki is törölné,
+# akkor hány olyan üzenet lenne, amelynek elolvasásához fel kellene hívnia
 # a szolgáltatót? Írja ezt a számot a képernyőre!
 # (Az üzeneteket először 1, utoljára 24 órakor olvassa el.)
 
@@ -117,27 +117,27 @@ print(f"{unread_message_count} üzenethez kellene felhívni a szolgáltatót.")
 
 
 # 6. feladat
-# Ernő barátnője gyakran küld sms-t az 123456789-es számról. 
+# Ernő barátnője gyakran küld sms-t az 123456789-es számról.
 # Mennyi volt a leghosszabb idő, amennyi eltelt két üzenete között?
-# Ha legfeljebb 1 üzenet érkezett tőle, akkor írja ki, hogy 
-# „nincs elegendő üzenet”, egyébként pedig adja meg 
+# Ha legfeljebb 1 üzenet érkezett tőle, akkor írja ki, hogy
+# „nincs elegendő üzenet”, egyébként pedig adja meg
 # a leghosszabb időtartamot óra perc alakban!
 
 print("6. feladat:")
 girlfriend_messages = []
 for message in messages:
-    if message["sender"] == "123456789":
+    if message["sender"] == 123456789:
         girlfriend_messages.append(message)
 
-max_message_difference = 0
-for i in range(1, len(girlfriend_messages)):
-    difference = messages[i]["timestamp"] - messages[i-1]["timestamp"]
-    if difference > max_message_difference:
-        max_message_difference = difference
-
-if len(max_message_difference) < 2:
+if len(girlfriend_messages) < 2:
     print("nincs elegendő üzenet")
 else:
+    max_message_difference = 0
+    for i in range(1, len(girlfriend_messages)):
+        difference = messages[i]["timestamp"] - messages[i-1]["timestamp"]
+        if difference > max_message_difference:
+            max_message_difference = difference
+
     max_difference_hour = max_message_difference // 60
     max_difference_minute = max_message_difference % 60
     print("A leghosszabb idő ami Ernő barátnőjének két üzenete közt telt el: "
@@ -155,8 +155,8 @@ minute = input("Adja meg az üzenet percét: ")
 sender = input("Adja meg az üzenet küldőjének telefonszámát: ")
 content = input("Adja meg az üzenet tartalmát: ")
 message = {
-    "hour": int(hour),
-    "minute": int(minute),
+    "hour": hour,
+    "minute": minute,
     "timestamp": int(hour)*60 + int(minute),
     "sender": int(sender),
     "message": content,
@@ -166,10 +166,10 @@ messages.append(message)
 
 
 # 8. feladat
-# Az smski.txt állományban készítsen egy listát az üzenetekről 
-# telefonszám szerinti csoportosításban, telefonszám szerint növekvő sorrendben!
+# Az smski.txt állományban készítsen egy listát az üzenetekről telefonszám
+# szerinti csoportosításban, telefonszám szerint növekvő sorrendben!
 # Egy csoporthoz tartozó első sorban a feladó telefonszáma szerepeljen!
-# Az alatta lévő sorokban a feladás ideje, 
+# Az alatta lévő sorokban a feladás ideje,
 # majd a tőle újabb szóközzel elválasztva az üzenet szövege szerepeljen!
 
 messages_by_sender = {}
@@ -179,7 +179,7 @@ for message in messages:
     if sender not in senders:
         senders.append(sender)
         messages_by_sender[sender] = []
-    
+
     messages_by_sender[sender].append(message)
 
 senders.sort()
