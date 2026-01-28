@@ -26,6 +26,8 @@ with open("sms.txt", "rt", encoding="utf-8") as file:
             "length": len(message_content)
         }
 
+        messages.append(message)
+
 
 # 2. feladat
 # A fájlban tárolt utolsó üzenet érkezésekor melyik üzenet a legfrissebb
