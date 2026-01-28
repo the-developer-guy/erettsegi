@@ -27,6 +27,7 @@ with open("igeny.txt", "rt", encoding="utf-8") as file:
 # Kérje be a felhasználótól, hogy melyik szinten áll a lift,
 # és a további részfeladatok megoldásánál ezt vegye figyelembe!
 
+print("2. feladat")
 lift_start_position = int(input("Adja meg a lift tartózkodási emeletét: "))
 
 
@@ -34,8 +35,10 @@ lift_start_position = int(input("Adja meg a lift tartózkodási emeletét: "))
 # Határozza meg, hogy melyik szinten áll majd a lift
 # az utolsó kérés teljesítését követően!
 
-last_request = requests[len(requests)-2]
-print(f"A lift a {last_request["target"]}. szinten áll az utolsó igény teljesítése után.")
+print("3. feladat")
+last_request = requests[len(requests)-1]
+print(f"A lift a {last_request["target_floor"]}. szinten áll "
+      "az utolsó igény teljesítése után.")
 
 
 # 4. feladat
@@ -43,6 +46,7 @@ print(f"A lift a {last_request["target"]}. szinten áll az utolsó igény teljes
 # között melyik volt a legalacsonyabb
 # és melyik a legmagasabb sorszámú szint, amelyet a lift érintett!
 
+print("4. feladat")
 highest_floor = lift_start_position
 lowest_floor = lift_start_position
 for request in requests:
@@ -50,11 +54,14 @@ for request in requests:
         highest_floor = request["start_floor"]
     if request["target_floor"] > highest_floor:
         highest_floor = request["target_floor"]
-    
+
     if request["start_floor"] < lowest_floor:
         lowest_floor = request["start_floor"]
     if request["target_floor"] < lowest_floor:
         lowest_floor = request["target_floor"]
+
+print(f"A legalacsonyabb szint, amit a lift érintett: {lowest_floor}")
+print(f"A legmagasabb szint, amit a lift érintett: {highest_floor}")
 
 
 # 5. feladat
@@ -62,6 +69,7 @@ for request in requests:
 # és hányszor utas nélkül!
 # Az eredményt jelenítse meg a képernyőn!
 
+print("5. feladat")
 travel_up_with_passengers_count = 0
 travel_up_empty_count = 0
 lift_current_position = lift_start_position
@@ -72,6 +80,9 @@ for request in requests:
         travel_up_with_passengers_count += 1
     lift_current_position = request["target_floor"]
 
+print(f"A lift {travel_up_with_passengers_count} alkalommal indult felfelé "
+      f"utassal és {travel_up_empty_count} alkalommal utas nélkül.")
+
 
 # 6. feladat
 # Határozza meg, hogy mely szerelőcsapatok nem vették igénybe a liftet
@@ -79,6 +90,7 @@ for request in requests:
 # A szerelőcsapatok sorszámát egymástól egy-egy szóközzel elválasztva
 # írja a képernyőre!
 
+print("6. feladat")
 travelled_teams = set()
 for request in requests:
     travelled_teams.add(request["team"])
@@ -100,9 +112,11 @@ else:
 # Generáljon véletlenszerűen egy létező csapatsorszámot!
 # Határozza meg, hogy a vizsgált időszak igényei alapján lehet-e egyértelműen
 # bizonyítani, hogy ez a csapat vétett a szabályok ellen!
-# Ha igen, akkor adja meg, hogy melyik két szint közötti utat tették meg gyalog,
-# ellenkező esetben írja ki a Nem bizonyítható szabálytalanság szöveget!
+# Ha igen, akkor adja meg, hogy melyik két szint közötti utat tették meg
+# gyalog, ellenkező esetben írja ki a
+# Nem bizonyítható szabálytalanság szöveget!
 
+print("7. feladat")
 generated_team_number = random.randint(1, team_count)
 team_requests = []
 for request in requests:
@@ -126,7 +140,7 @@ else:
 
 
 # 8. feladat
-# A munkák elvégzésének adminisztrálásához minden csapatnak egy blokkoló kártyát
+# A munkák elvégzésének adminisztrálásához minden csapatnak egy blokkolókártyát
 # kell használnia. A kártyára a liftben elhelyezett blokkolóóra rögzíti az
 # emeletet, az időpontot. Ennek a készüléknek a segítségével kell megadni a
 # munka kódszámát és az adott munkafolyamat sikerességét.
@@ -153,16 +167,17 @@ else:
 # Célemelet: 6
 # Feladatkód: 6
 
+print("8. feladat")
 with open("blokkol.txt", "wt", encoding="utf-8") as file:
     for request in team_requests:
         h = request["hour"]
         m = request["minute"]
         s = request["second"]
-        success = input(f"Adja meg, hogy a {h}:{m}:{s}-kor befejezett munka "
-                        "sikeres volt-e (i/n)")
+        success = input(f"Adja meg, hogy a {h}:{m:02}:{s:02}-kor befejezett "
+                        "munka sikeres volt-e (i/n)")
         job_code = int(input("Adja meg a következő munka kódját (1-99): "))
 
-        file.write(f"Befejezés ideje: {h}:{m}:{s}")
+        file.write(f"Befejezés ideje: {h}:{m:02}:{s:02}\n")
         if success == "i":
             file.write("Sikeresség: befejezett\n-----\n")
         else:
