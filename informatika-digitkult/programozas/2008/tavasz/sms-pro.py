@@ -1,7 +1,7 @@
+# E-Learning: https://elearning.tdg.hu/2008-majus/
+# Teljes megoldás: https://youtu.be/CkRpaqspvWU
+
 def binning(data: list, *limits):
-    if len(limits) < 3:
-        raise TypeError("binning() requires at least 3 limit values, "
-                        f"got {len(limits)}")
     sorted_limits = sorted(limits)
 
     bins = []
@@ -33,36 +33,48 @@ class Message:
         return self.content
 
     def __lt__(self, other):
-        return self.__length < other.__length
+        match other:
+            case int():
+                return self.__length < other
+            case Message():
+                return self.__length < other.__length
+            case _:
+                return self.__length < len(other)
 
-    def __len__(self):
-        return self.__length
+    def __le__(self, other):
+        match other:
+            case int():
+                return self.__length <= other
+            case Message():
+                return self.__length <= other.__length
+            case _:
+                return self.__length <= len(other)
 
 
 class Inbox:
 
     def __init__(self):
         self.messages = {}
-        pass
-
-    def new_message(self, hour: str, minute: str, sender: str, content: str):
-        message = Message(hour, minute, sender, content)
-        self.add_message(message)
 
     def add_message(self, message: Message):
         if message.sender not in self.messages:
             self.messages[message.sender] = []
         self.messages[message.sender].append(message)
 
+    def new_message(self, hour: str, minute: str, sender: str, content: str):
+        message = Message(hour, minute, sender, content)
+        self.add_message(message)
+
     def get_messages_by_sender(self, phone):
         return self.messages[phone]
 
 
 # 1. feladat
+# https://youtu.be/ij0mMWGpep8
 messages = []
 with open("sms.txt", "rt", encoding="utf-8") as file:
-    count = int(file.readline())
-    for message_index in range(count):
+    message_count = int(file.readline())
+    for message_index in range(message_count):
         message_data = file.readline()
         message_content = file.readline()
 
@@ -70,10 +82,12 @@ with open("sms.txt", "rt", encoding="utf-8") as file:
 
         message = Message(data_parts[0], data_parts[1], data_parts[2],
                           message_content)
+
         messages.append(message)
 
 
 # 2. feladat
+# https://youtu.be/pzO7IA2S6zA
 print("2. feladat:")
 if len(messages) < 10:
     last_message = messages[-1]
@@ -84,7 +98,8 @@ print(f"A telefonban a következő üzenet a legfrissebb:\n{last_message}")
 
 
 # 3. feladat
-print("3. feladat:")
+# https://youtu.be/oXZJmM0bwnE
+print("3. feladat")
 longest_message = max(messages)
 shortest_message = min(messages)
 
@@ -97,20 +112,9 @@ print("A leghosszabb üzenet: "
 
 
 # 4. feladat
-print("4. feladat:")
-stat = [0, 0, 0, 0, 0]
-for message in messages:
-    message_lenght = len(message)
-    if 0 < message_lenght <= 20:
-        stat[0] += 1
-    elif 20 < message_lenght <= 40:
-        stat[1] += 1
-    elif 40 < message_lenght <= 60:
-        stat[2] += 1
-    elif 60 < message_lenght <= 80:
-        stat[3] += 1
-    elif 80 < message_lenght <= 100:
-        stat[4] += 1
+# https://youtu.be/GEx0rOiBfjk
+print("4. feladat")
+stat = binning(messages, 1, 20, 40, 60, 80, 100)
 
 print(f"1-20: {stat[0]}\n"
       f"21-40: {stat[1]}\n"
@@ -118,8 +122,9 @@ print(f"1-20: {stat[0]}\n"
       f"61-80: {stat[3]}\n"
       f"81-100: {stat[4]}")
 
+
 # 5. feladat
-print("5. feladat:")
+print("5. feladat")
 current_hour = messages[0].hour
 hourly_message_count = 0
 unread_message_count = 0
@@ -135,18 +140,21 @@ print(f"{unread_message_count} üzenethez kellene felhívni a szolgáltatót.")
 
 
 # 6. feladat
-print("6. feladat:")
-girlfriend_messages = []
+# https://youtu.be/t8S7Q33kXe0
+print("6. feladat")
+
+inbox = Inbox()
 for message in messages:
-    if message.sender == 123456789:
-        girlfriend_messages.append(message)
+    inbox.add_message(message)
+
+girlfriend_messages = inbox.get_messages_by_sender(123456789)
 
 if len(girlfriend_messages) < 2:
     print("nincs elegendő üzenet")
 else:
     max_message_difference = 0
     for i in range(1, len(girlfriend_messages)):
-        difference = messages[i].timestamp - messages[i-1].timestamp
+        difference = girlfriend_messages[i].timestamp - girlfriend_messages[i-1].timestamp
         if difference > max_message_difference:
             max_message_difference = difference
 
@@ -157,25 +165,22 @@ else:
 
 
 # 7. feladat
-print("7. feladat:")
+# https://youtu.be/ur7pmxHcCho
+print("7. feladat")
 hour = input("Adja meg az üzenet óráját: ")
 minute = input("Adja meg az üzenet percét: ")
 sender = input("Adja meg az üzenet küldőjének telefonszámát: ")
 content = input("Adja meg az üzenet tartalmát: ")
-late_message = Message(hour, minute, sender, content)
-messages.append(late_message)
+inbox.new_message(hour, minute, sender, content)
+
 
 # 8. feladat
-
-inbox = Inbox()
-for message in messages:
-    inbox.add_message(message)
-
+# https://youtu.be/vHk41dCImrI
 sorted_phone_numbers = sorted(inbox.messages)
 
 with open("smski.txt", "wt", encoding="utf-8") as file:
     for sender in sorted_phone_numbers:
-        messages = inbox.get_messages_by_sender(sender)
+        msgs = inbox.get_messages_by_sender(sender)
         file.write(f"{sender}\n")
-        for message in messages:
+        for message in msgs:
             file.write(f"{message.hour} {message.minute} {message}\n")

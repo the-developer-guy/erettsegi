@@ -1,4 +1,8 @@
+# E-Learning: https://elearning.tdg.hu/2008-majus/
+# Teljes megoldás: https://youtu.be/NREN4E2Ih1A
+
 # 1. feladat
+# https://youtu.be/nIkA_qJf2dw
 # Olvassa be az sms.txt állományban talált adatokat,
 # s annak felhasználásával oldja meg a következő feladatokat!
 # Ha az állományt nem tudja beolvasni, akkor a benne található adatok közül
@@ -30,6 +34,7 @@ with open("sms.txt", "rt", encoding="utf-8") as file:
 
 
 # 2. feladat
+# https://youtu.be/k6yd9AWvuwg
 # A fájlban tárolt utolsó üzenet érkezésekor melyik üzenet a legfrissebb
 # a telefon memóriájában? Írja az üzenet szövegét a képernyőre!
 
@@ -45,6 +50,7 @@ print("A telefonban a következő üzenet a legfrissebb:\n"
 
 
 # 3. feladat
+# https://youtu.be/cWxJPNWvqnA
 # Adja meg a leghosszabb és a legrövidebb üzenetek adatait!
 # Ha több azonos hosszúságú üzenet van, akkor elegendő csak egyet-egyet
 # megadnia! A képernyőn
@@ -69,6 +75,7 @@ print("A leghosszabb üzenet: "
 
 
 # 4. feladat
+# https://youtu.be/hFtYTvL_Z04
 # Készítsen karakterhossz szerinti statisztikát:
 # 1-20, 21-40, 41-60, 61-80, 81-100!
 # Az intervallumok mellé a hozzájuk tartozó üzenetek darabszámát írja,
@@ -97,6 +104,7 @@ print(f"1-20: {stat[0]}\n"
 
 
 # 5. feladat
+# https://youtu.be/b_7wvfNmdiE
 # Ha Ernő minden óra 0. percében elolvasná a memóriában lévő üzeneteket
 # (az éppen ekkor érkező üzeneteket nem látja), majd ki is törölné,
 # akkor hány olyan üzenet lenne, amelynek elolvasásához fel kellene hívnia
@@ -119,6 +127,7 @@ print(f"{unread_message_count} üzenethez kellene felhívni a szolgáltatót.")
 
 
 # 6. feladat
+# https://youtu.be/fdg_hbEJjM0
 # Ernő barátnője gyakran küld sms-t az 123456789-es számról.
 # Mennyi volt a leghosszabb idő, amennyi eltelt két üzenete között?
 # Ha legfeljebb 1 üzenet érkezett tőle, akkor írja ki, hogy
@@ -136,7 +145,8 @@ if len(girlfriend_messages) < 2:
 else:
     max_message_difference = 0
     for i in range(1, len(girlfriend_messages)):
-        difference = messages[i]["timestamp"] - messages[i-1]["timestamp"]
+        difference = girlfriend_messages[i]["timestamp"] \
+            - girlfriend_messages[i-1]["timestamp"]
         if difference > max_message_difference:
             max_message_difference = difference
 
@@ -147,6 +157,7 @@ else:
 
 
 # 7. feladat
+# https://youtu.be/reLmLJO6Svc
 # Egy üzenet véletlenül késett.
 # Olvassa be a billentyűzetről ennek az sms-nek az adatait,
 # majd tárolja el a memóriában a többihez hasonlóan!
@@ -168,6 +179,7 @@ messages.append(message)
 
 
 # 8. feladat
+# https://youtu.be/2CAtg5qSUk0
 # Az smski.txt állományban készítsen egy listát az üzenetekről telefonszám
 # szerinti csoportosításban, telefonszám szerint növekvő sorrendben!
 # Egy csoporthoz tartozó első sorban a feladó telefonszáma szerepeljen!
