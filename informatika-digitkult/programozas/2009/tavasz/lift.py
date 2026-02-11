@@ -9,7 +9,8 @@ with open("igeny.txt", "rt", encoding="utf-8") as file:
     floor_count = int(file.readline())
     team_count = int(file.readline())
     request_count = int(file.readline())
-    for line in file:
+    for i in range(request_count):
+        line = file.readline()
         parts = line.strip().split(" ")
         request = {
             "hour": int(parts[0]),
@@ -28,7 +29,7 @@ with open("igeny.txt", "rt", encoding="utf-8") as file:
 # és a további részfeladatok megoldásánál ezt vegye figyelembe!
 
 print("2. feladat")
-lift_start_position = int(input("Adja meg a lift tartózkodási emeletét: "))
+lift_start_position = int(input("Adja meg a lift kiindulási emeletét: "))
 
 
 # 3. feladat
@@ -126,9 +127,9 @@ for request in requests:
 violations = []
 for i in range(1, len(team_requests)):
     last_floor = team_requests[i-1]["target_floor"]
-    next_floor = team_requests[i]["start_floor"]
-    if last_floor != next_floor:
-        violations.append((last_floor, next_floor))
+    current_floor = team_requests[i]["start_floor"]
+    if last_floor != current_floor:
+        violations.append((last_floor, current_floor))
 
 if len(violations) == 0:
     print("Nem bizonyítható szabálytalanság")
@@ -174,7 +175,7 @@ with open("blokkol.txt", "wt", encoding="utf-8") as file:
         m = request["minute"]
         s = request["second"]
         success = input(f"Adja meg, hogy a {h}:{m:02}:{s:02}-kor befejezett "
-                        "munka sikeres volt-e (i/n)")
+                        "munka sikeres volt-e (i/n): ")
         job_code = int(input("Adja meg a következő munka kódját (1-99): "))
 
         file.write(f"Befejezés ideje: {h}:{m:02}:{s:02}\n")
