@@ -1,4 +1,10 @@
 import math
+
+
+def round_5(number):
+    return round(number/5) * 5
+
+
 # 1. feladat
 # Olvassa be az eladott.txt állományban talált adatokat, s azok felhasználásával
 # oldja meg a következő feladatokat!
@@ -15,12 +21,14 @@ with open("eladott.txt", "rt", encoding="utf-8") as file:
         board = int(ticket_parts[1])
         alight = int(ticket_parts[2])
         distance = alight-board
+        price = math.ceil(distance/10) * fare
+        rounded_price = round_5(price)
         passenger = {
             "id": ticket_id,
             "seat": int(ticket_parts[0]),
             "board": board,
             "alight": alight,
-            "price": math.ceil(distance/10) * fare
+            "price": rounded_price
         }
         passengers.append(passenger)
         ticket_id += 1
@@ -31,9 +39,9 @@ with open("eladott.txt", "rt", encoding="utf-8") as file:
 
 print("2. feladat")
 last_passenger = passengers[-1]
+distance = last_passenger["alight"]-last_passenger["board"]
 print(f"Az utolsó jegyvásárló a(z) {last_passenger["seat"]}. számú ülésen "
-      f"utazott, és {last_passenger["alight"]-last_passenger["board"]} "
-      "kilométert tett meg.")
+      f"utazott, és {distance} kilométert tett meg.")
 
 
 # 3. feladat
