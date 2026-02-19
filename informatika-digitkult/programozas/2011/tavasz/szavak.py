@@ -1,5 +1,10 @@
 def vowel_count(word):
-    return 0
+    count = 0
+    for c in word:
+        if c == 'a' or c == 'e' or c == 'i' or c == 'o' or c == 'u':
+            count += 1
+    return count
+
 
 # 1. feladat
 # Kérjen be a felhasználótól egy szót, és döntse el, hogy tartalmaz-e 
