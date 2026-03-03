@@ -16,7 +16,8 @@ with open("eladott.txt", "rt", encoding="utf-8") as file:
     ride_length = int(travel_info[1])
     fare = int(travel_info[2])
     ticket_id = 1
-    for line in file:
+    for i in range(sold_ticket_count):
+        line = file.readline()
         ticket_parts = line.split(" ")
         board = int(ticket_parts[1])
         alight = int(ticket_parts[2])
@@ -58,8 +59,8 @@ if len(long_traveling_passengers) == 0:
 else:
     print("A következő utasok utaztak végig:")
     for i in range(len(long_traveling_passengers)-1):
-        print(f"{long_traveling_passengers[i]["id"]}", end=" ")
-    print(f"{long_traveling_passengers[len(long_traveling_passengers)-1]["id"]}")
+        print(long_traveling_passengers[i]["id"], end=" ")
+    print(long_traveling_passengers[-1]["id"])
 
 
 # 4. feladat
@@ -83,9 +84,11 @@ for passenger in passengers:
     stops.add(passenger["board"])
     stops.add(passenger["alight"])
 sorted_stops = list(stops)
+if ride_length in sorted_stops:
+    sorted_stops.remove(ride_length)
 sorted_stops.sort()
 
-last_stop = sorted_stops[-2]
+last_stop = sorted_stops[-1]
 boarding_passenger_count = 0
 alighting_passenger_count = 0
 
@@ -104,7 +107,9 @@ print(f"A végállomást megelőző utolsó megállónál {boarding_passenger_co
 # célállomás között! Az eredményt írja a képernyőre!
 
 print("6. feladat")
-print(f"A busz {len(stops)-2} helyen állt meg.")
+if 0 in sorted_stops:
+    sorted_stops.remove(0)
+print(f"A busz {len(sorted_stops)} helyen állt meg.")
 
 
 # 7. feladat
@@ -126,8 +131,8 @@ for passenger in passengers:
         occupied_seats[passenger["seat"]] = passenger["id"]
 
 with open("kihol.txt", "wt", encoding="utf-8") as file:
-    for i in range(1, 49):
-        if i in occupied_seats:
-            file.write(f"{i}. ülés: {occupied_seats[i]}. utas\n")
+    for seat in range(1, 49):
+        if seat in occupied_seats:
+            file.write(f"{seat}. ülés: {occupied_seats[seat]}. utas\n")
         else:
-            file.write(f"{i}. ülés: üres\n")
+            file.write(f"{seat}. ülés: üres\n")
