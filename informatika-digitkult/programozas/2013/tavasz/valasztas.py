@@ -2,6 +2,7 @@
 # Olvassa be a szavazatok.txt fájl adatait, majd ezek felhasználásával oldja meg
 # a következő feladatokat! Az adatfájlban legfeljebb 100 képviselőjelölt
 # adatai szerepelnek.
+print("1. feladat")
 votes = []
 with open("szavazatok.txt", "rt", encoding="utf-8") as file:
     for line in file:
@@ -18,7 +19,7 @@ with open("szavazatok.txt", "rt", encoding="utf-8") as file:
 # Hány képviselőjelölt indult a helyhatósági választáson? A kérdésre egész
 # mondatban válaszoljon az alábbi mintához hasonlóan:
 # A helyhatósági választáson 92 képviselőjelölt indult.
-
+print("2. feladat")
 print(f"A helyhatósági választáson {len(votes)} képviselőjelölt indult.")
 
 
@@ -29,7 +30,7 @@ print(f"A helyhatósági választáson {len(votes)} képviselőjelölt indult.")
 # „Ilyen nevű képviselőjelölt nem szerepel a nyilvántartásban!”
 # figyelmeztetés! A feladat megoldása során feltételezheti, hogy
 # nem indult két azonos nevű képviselőjelölt a választáson.
-
+print("3. feladat")
 candidate_name = input("Adja meg egy képviselőjelölt nevét: ").strip()
 candidate_found = False
 for vote in votes:
@@ -47,7 +48,7 @@ if not candidate_found:
 # részt a szavazáson.) A részvételi arányt két tizedesjegy pontossággal,
 # százalékos formában írja ki a képernyőre! Például:
 # A választáson 5001 állampolgár, a jogosultak 40,51%-a vett részt.
-
+print("4. feladat")
 vote_sum = 0
 for vote in votes:
     vote_sum += vote["vote_count"]
@@ -63,7 +64,7 @@ print(f"A választáson {vote_sum} állampolgár, a jogosultak "
 # Például:
 # Zöldségevők Pártja= 12,34%
 # Független jelöltek= 23,40%
-
+print("5. feladat")
 votes_by_party = {
     "GYEP": 0,
     "HEP": 0,
@@ -87,7 +88,7 @@ print(f"Független jelöltek= {votes_by_party["-"]/vote_sum:.2%}")
 # képviselő vezeték- és utónevét, valamint az őt támogató párt rövidítését, vagy
 # azt, hogy független! Ha több ilyen képviselő is van,
 # akkor mindegyik adatai jelenjenek meg!
-
+print("6. feladat")
 high_score = 0
 highest_voted = []
 for vote in votes:
@@ -99,9 +100,9 @@ for vote in votes:
 
 for vote in highest_voted:
     if vote["party"] == "-":
-        print(f"{vote["name"]} {vote["party"]}")
-    else:
         print(f"{vote["name"]} független")
+    else:
+        print(f"{vote["name"]} {vote["party"]}")
 
 
 # 7. feladat
@@ -111,7 +112,7 @@ for vote in highest_voted:
 # elválasztva a kepviselok.txt nevű szöveges fájlba! Az adatok a
 # választókerületek száma szerinti sorrendben jelenjenek meg!
 # Minden sorba egy képviselő adatai kerüljenek!
-
+print("7. feladat")
 districts = {}
 for vote in votes:
     if vote["district"] not in districts:
@@ -128,4 +129,4 @@ with open("kepviselok.txt", "wt", encoding="utf-8") as file:
         party = winner["party"]
         if party == "-":
             party = "független"
-        file.write(f"{winner["name"]} {party}\n")
+        file.write(f"{i} {winner["name"]} {party}\n")
