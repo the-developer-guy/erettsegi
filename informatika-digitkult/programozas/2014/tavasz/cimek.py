@@ -11,7 +11,7 @@ with open("ip.txt", "rt", encoding="utf-8") as file:
 
 # 2. feladat
 # Határozza meg és írja a képernyőre, hogy hány adatsor van az állományban!
-
+print("2. feladat:")
 print(f"Az állományban {len(addresses)} darab adatsor van.")
 
 
@@ -19,7 +19,7 @@ print(f"Az állományban {len(addresses)} darab adatsor van.")
 # Írja a képernyőre az állományban található legalacsonyabb IP-címet! A
 # megoldásában felhasználhatja, hogy a betűk ASCII-kódjai a számok ASCII-kódjai
 # után találhatók a kódtáblában.
-
+print("3. feladat:")
 lowest_address = addresses[0]
 for address in addresses:
     if address < lowest_address:
@@ -30,7 +30,7 @@ print(f"A legalacsonyabb tárolt IP-cím:\n{lowest_address}")
 # 4. feladat
 # Határozza meg, hogy az állományban hány darab IP-cím van az egyes fajtákból!
 # Az eredményt jelenítse meg a képernyőn a mintának megfelelően!
-
+print("4. feladat:")
 ADDRESS_TYPE_DOC = "2001:0db8"
 ADDRESS_TYPE_GLOBAL = "2001:0e"
 ADDRESS_TYPE_LOCAL_FC = "fc"
@@ -72,7 +72,7 @@ with open("sok.txt", "wt", encoding="utf-8") as destination_file:
 # található IP-címet rövidítse a csoportokon belüli bevezető nullák
 # elhagyásával! Az állományban található alakot és a rövidített változatot írja
 # a képernyőre egymás alá!
-
+print("6. feladat:")
 num = int(input("Kérek egy sorszámot: "))
 address = addresses[num-1]
 print(address)
@@ -96,7 +96,7 @@ print(shorter_address)
 # nullás csoportok rövidítésére vonatkozó szabályoknak megfelelően! Az eredményt
 # jelenítse meg a képernyőn! Amennyiben nem rövidíthető, írja ki:
 # Nem rövidíthető tovább.
-
+print("7. feladat:")
 shorter_blocks = shorter_address.split(":")
 zero_block_lenght = 0
 zero_block_end_index = 0
