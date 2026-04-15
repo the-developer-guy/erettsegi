@@ -38,7 +38,7 @@ with open("tavok.txt", "rt", encoding="utf-8") as file:
 # Írja ki a képernyőre, hogy mekkora volt a hét legelső útja kilométerben!
 # Figyeljen arra, hogy olyan állomány esetén is helyes értéket adjon, amiben
 # például a hét első napján a futár nem dolgozott!
-
+print("2. feladat")
 first_ride = rides[0]
 for ride in rides:
     if ride["ride"] == 1 and ride["day"] <= first_ride["day"]:
@@ -49,7 +49,7 @@ print(f"Az első út {first_ride["distance"]} km hosszú volt.")
 
 # 3. feladat
 # Írja ki a képernyőre, hogy mekkora volt a hét utolsó útja kilométerben!
-
+print("3. feladat")
 last_ride = rides[0]
 for ride in rides:
     if ride["day"] > last_ride["day"]:
@@ -63,7 +63,7 @@ print(f"Az utolsó út {last_ride["distance"]} km hosszú volt.")
 # 4. feladat
 # Tudjuk, hogy a futár minden héten tart legalább egy szabadnapot. Írja ki a
 # képernyőre, hogy a hét hányadik napjain nem dolgozott a futár!
-
+print("4. feladat")
 days_with_ride = set()
 for ride in rides:
     days_with_ride.add(ride["day"])
@@ -78,10 +78,10 @@ for i in range(1, 8):
 # Írja ki a képernyőre, hogy a hét melyik napján volt a legtöbb fuvar!
 # Amennyiben több nap is azonos, maximális számú fuvar volt, elegendő ezek
 # egyikét kiírnia.
-
+print("5. feladat")
 ride_counter = [0, 0, 0, 0, 0, 0, 0]
 for ride in rides:
-    i = ride["day"]
+    i = ride["day"]-1
     ride_counter[i] += 1
 
 max_ride_index = 0
@@ -98,10 +98,10 @@ print(f"A(z) {max_ride_index+1}. napon volt a legtöbb fuvar.")
 # 1. nap: 124 km
 # 2. nap: 0 km
 # 3. nap: 75 km
-
+print("6. feladat")
 ride_distances = [0, 0, 0, 0, 0, 0, 0]
 for ride in rides:
-    i = ride["day"]
+    i = ride["day"]-1
     ride_distances[i] += ride["distance"]
 
 for i in range(7):
@@ -111,7 +111,7 @@ for i in range(7):
 # 7. feladat
 # Kérjen be a felhasználótól egy tetszőleges távolságot, és határozza meg,
 # hogy mekkora díjazás jár érte! Ezt írja a képernyőre!
-
+print("7. feladat")
 distance = int(input("Adjon meg egy távolságot (egész szám 1-30): "))
 print(f"{distance} km-re {ride_price(distance)} Ft-ot kapna a futár.")
 
@@ -124,25 +124,29 @@ print(f"{distance} km-re {ride_price(distance)} Ft-ot kapna a futár.")
 # 1. nap 2. út: 900 Ft
 # 1. nap 3. út: 2000 Ft
 
-daily_rides = {}
-for ride in rides:
-    day = ride["day"]
-    if day not in daily_rides:
-        daily_rides[day] = []
-    daily_rides[day].append(ride)
+ride_count = len(rides)
+for i in range(ride_count-1):
+    min_index = i
+    for j in range(i+1, ride_count):
+        if rides[j]["day"] < rides[min_index]["day"]:
+            min_index = j
+        elif rides[j]["day"] == rides[min_index]["day"] and \
+            rides[j]["ride"] < rides[min_index]["ride"]:
+            min_index = j
+    if min_index != i:
+        swap = rides[i]
+        rides[i] = rides[min_index]
+        rides[min_index] = swap
 
-for i in range(1, 8):
-    if i not in daily_rides:
-        continue
+with open("dijazas.txt", "wt", encoding="utf-8") as file:
+    for ride in rides:
+        file.write(f"{ride.day}. nap {ride.ride}. út: {ride.price} Ft\n")
 
-    daily_rides[i].sort()
-    for ride in daily_rides[i]:
-        print(f"{i}. nap {ride["ride"]}. út: {ride["price"]} Ft")
 
 # 9. feladat
 # Határozza meg, és írja ki a képernyőre, hogy a futár mekkora összeget kap a
 # heti munkájáért!
-
+print("9. feladat")
 full_income = 0
 for ride in rides:
     full_income += ride["price"]
