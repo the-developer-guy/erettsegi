@@ -36,20 +36,20 @@ ADDRESS_TYPE_GLOBAL = "2001:0e"
 ADDRESS_TYPE_LOCAL_FC = "fc"
 ADDRESS_TYPE_LOCAL_FD = "fd"
 
-doc_address_count = 0
+documentation_address_count = 0
 global_address_count = 0
 local_address_count = 0
 
 for address in addresses:
-    if address.startswith(ADDRESS_TYPE_DOC):
-        doc_address_count += 1
-    elif address.startswith(ADDRESS_TYPE_GLOBAL):
+    if address[0:9] == ADDRESS_TYPE_DOC:
+        documentation_address_count += 1
+    elif address[0:7] == ADDRESS_TYPE_GLOBAL:
         global_address_count += 1
-    elif address.startswith(ADDRESS_TYPE_LOCAL_FC) or \
-        address.startswith(ADDRESS_TYPE_LOCAL_FD):
+    elif address[0:2] == ADDRESS_TYPE_LOCAL_FC or \
+        address[0:2] == ADDRESS_TYPE_LOCAL_FD:
         local_address_count += 1
 
-print(f"Dokumentációs cím: {doc_address_count} darab")
+print(f"Dokumentációs cím: {documentation_address_count} darab")
 print(f"Globális egyedi cím: {global_address_count} darab")
 print(f"Helyi egyedi cím: {local_address_count} darab")
 
@@ -62,7 +62,10 @@ print(f"Helyi egyedi cím: {local_address_count} darab")
 
 with open("sok.txt", "wt", encoding="utf-8") as destination_file:
     for i in range(len(addresses)):
-        zero_count = addresses[i].count("0")
+        zero_count = 0
+        for c in addresses[i]:
+            if c == "0":
+                zero_count += 1
         if zero_count >= 18:
             destination_file.write(f"{i+1} {addresses[i]}\n")
 
@@ -80,8 +83,15 @@ print(address)
 blocks = address.split(":")
 short_blocks = []
 for block in blocks:
-    block_value = int(block, 16)
-    short_blocks.append(f"{block_value:x}")
+    current_block = ""
+    for i in range(4):
+        if block[i] == "0":
+            continue
+        break
+    while i < 4:
+        current_block += block[i]
+        i += 1
+    short_blocks.append(current_block)
 
 shorter_address = ""
 for i in range(7):
@@ -104,31 +114,46 @@ zero_block_end_index = 0
 longest_zero_block_length = 0
 longest_zero_block_end_index = 0
 for i in range(8):
-    if short_blocks[i] != "0":
+    if shorter_blocks[i] == "0":
+        zero_block_lenght += 1
+        zero_block_end_index = i
+    else:
         if zero_block_lenght > longest_zero_block_length:
             longest_zero_block_length = zero_block_lenght
             longest_zero_block_end_index = zero_block_end_index
         zero_block_lenght = 0
-    else:
-        zero_block_lenght += 1
-        zero_block_end_index = i
+    
 
 if zero_block_lenght > longest_zero_block_length:
     longest_zero_block_length = zero_block_lenght
     longest_zero_block_end_index = zero_block_end_index
 
 if longest_zero_block_length > 1:
-    i = 0
     shortest_address = ""
-    while i < 7:
-        if i == (longest_zero_block_end_index - longest_zero_block_length + 1):
-            i = longest_zero_block_end_index + 1
-            shortest_address += ":"
-        else:
-            shortest_address += f"{shorter_blocks[i]}:"
-            i += 1
+    zero_block_start_index = longest_zero_block_end_index \
+        - (longest_zero_block_length-1)
 
-    shortest_address += shorter_blocks[7]
+    # rövidítéssel kezdünk
+    if zero_block_start_index == 0:
+        shortest_address += "::"
+        for i in range(longest_zero_block_end_index+1, 7):
+            shortest_address += f"{shorter_blocks[i]}:"
+        shortest_address += shorter_blocks[7]
+
+    # rövidítéssel végzünk
+    elif longest_zero_block_end_index == 7:
+        for i in range(8-longest_zero_block_length):
+            shortest_address += f"{shorter_blocks[i]}:"
+        shortest_address += ":"
+
+    # középen rövidítünk
+    else:
+        for i in range(zero_block_start_index):
+            shortest_address += f"{shorter_blocks[i]}:"
+        shortest_address += ":"
+        for i in range(longest_zero_block_end_index+1, 7):
+            shortest_address += f"{shorter_blocks[i]}:"
+        shortest_address += shorter_blocks[7]
 
     print(shortest_address)
 else:
