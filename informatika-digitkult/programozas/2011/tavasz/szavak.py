@@ -13,6 +13,7 @@ def vowel_count(word):
 # feltételezheti, hogy csak az angol ábécé kisbetűit tartalmazza.
 # (Az angol ábécé magánhangzói: a, e, i, o, u.)
 
+print("1. feladat")
 word = input("Adjon meg egy szót: ")
 i = 0
 while i < len(word):
@@ -38,6 +39,7 @@ else:
 # úgy oldja meg, hogy tetszőleges hosszúságú szövegállomány esetén működjön,
 # azaz a teljes szöveget ne tárolja a memóriában!
 
+print("2. feladat")
 with open("szoveg.txt", "rt", encoding="utf-8") as file:
     longest_word = file.readline().strip()
     for line in file:
@@ -60,14 +62,18 @@ print(f"A leghosszabb szó: \"{longest_word}\", hossza: {len(longest_word)}.")
 # A százalékot két tizedessel szerepeltesse! Például:
 # 130/3000 : 4,33%
 
+print("3. feladat")
 vowel_heavy_word_count = 0
 word_count = 0
 with open("szoveg.txt", "rt", encoding="utf-8") as file:
     for line in file:
         word = line.strip()
         word_count += 1
-        if vowel_count(word) > len(word):
+        vowels = vowel_count(word)
+        others = len(word) - vowels
+        if vowel_count > others:
             vowel_heavy_word_count += 1
+            print(word, end=" ")
 
 print(f"{vowel_heavy_word_count}/{word_count} : "
       f"{vowel_heavy_word_count/word_count:.2%}")
@@ -83,6 +89,7 @@ print(f"{vowel_heavy_word_count}/{word_count} : "
 # „obo” szórészleteket, mert ezekhez a megadott szövegállományban több létraszó
 # is tartozik.)
 
+print("4. feladat")
 ladder_words = []
 with open("szoveg.txt", "rt", encoding="utf-8") as file:
     for line in file:
@@ -95,6 +102,7 @@ print(f"A \"{word_middle}\" fokhoz tartozó szavak:")
 for word in ladder_words:
     if word[1:4] == word_middle:
         print(word, end=" ")
+print()
 
 
 # 5. feladat
