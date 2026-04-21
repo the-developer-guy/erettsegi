@@ -4,6 +4,7 @@ import random
 # Olvassa be az igeny.txt állományban talált adatokat,
 # s azok felhasználásával oldja meg a következő feladatokat!
 
+print("1. feladat")
 requests = []
 with open("igeny.txt", "rt", encoding="utf-8") as file:
     floor_count = int(file.readline())
