@@ -21,6 +21,7 @@ def ride_price(distance):
 # 1. feladat
 # Olvassa be a tavok.txt állományban talált adatokat, s annak felhasználásával
 # oldja meg a következő feladatokat!
+
 rides = []
 with open("tavok.txt", "rt", encoding="utf-8") as file:
     for line in file:
@@ -38,6 +39,7 @@ with open("tavok.txt", "rt", encoding="utf-8") as file:
 # Írja ki a képernyőre, hogy mekkora volt a hét legelső útja kilométerben!
 # Figyeljen arra, hogy olyan állomány esetén is helyes értéket adjon, amiben
 # például a hét első napján a futár nem dolgozott!
+
 print("2. feladat")
 first_ride = rides[0]
 for ride in rides:
@@ -49,6 +51,7 @@ print(f"Az első út {first_ride["distance"]} km hosszú volt.")
 
 # 3. feladat
 # Írja ki a képernyőre, hogy mekkora volt a hét utolsó útja kilométerben!
+
 print("3. feladat")
 last_ride = rides[0]
 for ride in rides:
@@ -63,6 +66,7 @@ print(f"Az utolsó út {last_ride["distance"]} km hosszú volt.")
 # 4. feladat
 # Tudjuk, hogy a futár minden héten tart legalább egy szabadnapot. Írja ki a
 # képernyőre, hogy a hét hányadik napjain nem dolgozott a futár!
+
 print("4. feladat")
 days_with_ride = set()
 for ride in rides:
@@ -78,6 +82,7 @@ for i in range(1, 8):
 # Írja ki a képernyőre, hogy a hét melyik napján volt a legtöbb fuvar!
 # Amennyiben több nap is azonos, maximális számú fuvar volt, elegendő ezek
 # egyikét kiírnia.
+
 print("5. feladat")
 ride_counter = [0, 0, 0, 0, 0, 0, 0]
 for ride in rides:
@@ -98,6 +103,7 @@ print(f"A(z) {max_ride_index+1}. napon volt a legtöbb fuvar.")
 # 1. nap: 124 km
 # 2. nap: 0 km
 # 3. nap: 75 km
+
 print("6. feladat")
 ride_distances = [0, 0, 0, 0, 0, 0, 0]
 for ride in rides:
@@ -111,6 +117,7 @@ for i in range(7):
 # 7. feladat
 # Kérjen be a felhasználótól egy tetszőleges távolságot, és határozza meg,
 # hogy mekkora díjazás jár érte! Ezt írja a képernyőre!
+
 print("7. feladat")
 distance = int(input("Adjon meg egy távolságot (egész szám 1-30): "))
 print(f"{distance} km-re {ride_price(distance)} Ft-ot kapna a futár.")
@@ -146,6 +153,7 @@ with open("dijazas.txt", "wt", encoding="utf-8") as file:
 # 9. feladat
 # Határozza meg, és írja ki a képernyőre, hogy a futár mekkora összeget kap a
 # heti munkájáért!
+
 print("9. feladat")
 full_income = 0
 for ride in rides:
